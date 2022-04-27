@@ -7,7 +7,8 @@
       <div class="w-full h-full max-w-sm mx-auto lg:w-96">
         <div class="mt-4">
           <img class="w-auto h-12" src="https://www.moduspartnerships.co.uk/assets/img/logo-dark.png" alt="Workflow">
-          <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+          <h2 class="mt-6 text-5xl font-extrabold text-gray-900">Welcome back</h2>
+          <h4 class="mt-6 text-xl font-extrabold text-gray-900">Sign in to your account</h4>
         </div>
   
         <div class="mt-8">
@@ -55,7 +56,7 @@
               </div>
               <div class="mt-5">
                 <p>
-                  Don't have an account
+                  Don't have an account?
                   <a class="underline text-sm text-[#173a68] hover:text-blue-800" href="{{ route('register') }}">
                     {{ __(' Create an account') }}
                   </a>
