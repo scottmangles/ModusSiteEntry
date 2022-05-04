@@ -1,12 +1,4 @@
 
-<div class="bg-[url('unsplash.jpg')] bg-cover" x-data="{ openMenu : false }"
-:class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
-
-<style>
-[x-cloak] {
-  display: none !important;
-}
-</style>
 <!-- This example requires Tailwind CSS v2.0+ -->
 <!--
   This example requires updating your template:
@@ -18,7 +10,7 @@
 -->
 <div>
   <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-  <div class="fixed inset-0 z-40 flex md:hidden" role="dialog" :class="openMenu ? 'visible' : 'invisible' " x-cloak>
+  <div class="fixed inset-0 z-40 flex md:hidden" role="dialog" aria-modal="true">
     <!--
       Off-canvas menu overlay, show/hide based on off-canvas menu state.
 
@@ -42,11 +34,7 @@
         To: "-translate-x-full"
     -->
     <div class="relative flex flex-col flex-1 w-full max-w-xs bg-gray-800">
-      
-      
-      
-      
-<!--
+      <!--
         Close button, show/hide based on off-canvas menu state.
 
         Entering: "ease-in-out duration-300"
@@ -57,7 +45,7 @@
           To: "opacity-0"
       -->
       <div class="absolute top-0 right-0 pt-2 -mr-12">
-        <button type="button" class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" @click="openMenu = !openMenu" :aria-expanded="openMenu">
+        <button type="button" class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
           <span class="sr-only">Close sidebar</span>
           <!-- Heroicon name: outline/x -->
           <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -225,10 +213,9 @@
   </div>
   <div class="flex flex-col flex-1 md:pl-64">
     <div class="sticky top-0 z-10 pt-1 pl-1 bg-gray-100 md:hidden sm:pl-3 sm:pt-3">
-      <button type="button" class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="openMenu = !openMenu"
-      :aria-expanded="openMenu">
+      <button type="button" class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
         <span class="sr-only">Open sidebar</span>
-        <!-- Mobile Menu Toggle -->
+        <!-- Heroicon name: outline/menu -->
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>

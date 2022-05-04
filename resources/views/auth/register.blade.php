@@ -6,7 +6,7 @@
        <div class="flex flex-col justify-center flex-1 px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
          <div class="w-full h-full max-w-sm mx-auto lg:w-96">
            <div>
-             <img class="w-auto h-12" src="https://www.moduspartnerships.co.uk/assets/img/logo-dark.png" alt="Workflow">
+            <x-application-logo />
              <h2 class="mt-2 text-3xl font-extrabold text-gray-900">Register New User</h2>
            </div>
      
@@ -100,7 +100,7 @@
        </div>
        <div class="relative flex-1 hidden w-0 lg:block">
          <img class="absolute inset-0 object-cover w-full h-full" src="https://www.moduspartnerships.co.uk/assets/img/slider/slider1a.jpg" alt="">
-         <img class="absolute inset-0" src="https://www.moduspartnerships.co.uk/assets/img/logo-dark.png" alt="">
+         <img class="absolute inset-0" src="{{ URL::asset('images/logo-dark.png') }}" alt="">
        </div>
      </div>
    

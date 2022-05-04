@@ -18,6 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('mobile');
+            $table->string('sub_contractor');
+            $table->string('vehicle_make')->nullable();
+            $table->string('vehicle_reg')->nullable();
+            $table->string('cscs_number')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

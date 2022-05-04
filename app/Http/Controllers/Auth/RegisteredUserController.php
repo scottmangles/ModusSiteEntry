@@ -37,12 +37,23 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'mobile' => ['required', 'digits:11', 'regex:/07[0-9]{9}/'],
+            'sub_contractor' => ['required'],
+            'vehicle_make' => ['nullable'],
+            'vehicle_reg' => ['nullable'],
+            'cscs_number' => ['nullable', 'digits:8']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'mobile' => $request->mobile,
+            'sub_contractor' => $request->sub_contractor ,
+            'vehicle_make' => $request->vehicle_make ,
+            'vehicle_reg' => $request->vehicle_reg ,
+            'cscs_number' => $request->cscs_number ,
+
         ]);
 
         event(new Registered($user));
