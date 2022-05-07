@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiteInductionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +20,5 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-Route::resource('site_inductions', SiteInductionController::class);
 
 require __DIR__.'/auth.php';
