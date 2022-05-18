@@ -24,8 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('vehicle_reg')->nullable();
             $table->string('cscs_number')->nullable();
             $table->string('password');
+            $table->timestamp('induction_completed')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

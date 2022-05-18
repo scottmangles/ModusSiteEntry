@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteInductionController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\OptionController;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +26,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('site_inductions', SiteInductionController::class);
+Route::resource('questions', QuestionController::class);
+Route::resource('options', OptionController::class);
+Route::resource('results', ResultController::class);
 
 require __DIR__.'/auth.php';

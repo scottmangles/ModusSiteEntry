@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOptionsRequest;
-use App\Http\Requests\UpdateOptionsRequest;
-use App\Models\Options;
+use Illuminate\Http\Request;
 
-class OptionsController extends Controller
+class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class OptionsController extends Controller
      */
     public function index()
     {
-        //
+        return view('questions.index');
     }
 
     /**
@@ -31,10 +29,10 @@ class OptionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreOptionsRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOptionsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +40,10 @@ class OptionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Options  $options
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Options $options)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class OptionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Options  $options
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Options $options)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +62,11 @@ class OptionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateOptionsRequest  $request
-     * @param  \App\Models\Options  $options
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOptionsRequest $request, Options $options)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +74,10 @@ class OptionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Options  $options
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Options $options)
+    public function destroy($id)
     {
         //
     }

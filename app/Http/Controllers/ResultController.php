@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreResultsRequest;
-use App\Http\Requests\UpdateResultsRequest;
-use App\Models\Results;
+use Illuminate\Http\Request;
 
-class ResultsController extends Controller
+class ResultController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +29,10 @@ class ResultsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreResultsRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreResultsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +40,10 @@ class ResultsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Results  $results
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Results $results)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class ResultsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Results  $results
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Results $results)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +62,11 @@ class ResultsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateResultsRequest  $request
-     * @param  \App\Models\Results  $results
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateResultsRequest $request, Results $results)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +74,10 @@ class ResultsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Results  $results
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Results $results)
+    public function destroy($id)
     {
         //
     }

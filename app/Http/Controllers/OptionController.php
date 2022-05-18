@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuestionsRequest;
-use App\Http\Requests\UpdateQuestionsRequest;
-use App\Models\Questions;
+use Illuminate\Http\Request;
 
-class QuestionsController extends Controller
+class OptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +29,10 @@ class QuestionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreQuestionsRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreQuestionsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +40,10 @@ class QuestionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Questions  $questions
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Questions $questions)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class QuestionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Questions  $questions
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Questions $questions)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +62,11 @@ class QuestionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateQuestionsRequest  $request
-     * @param  \App\Models\Questions  $questions
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateQuestionsRequest $request, Questions $questions)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +74,10 @@ class QuestionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Questions  $questions
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Questions $questions)
+    public function destroy($id)
     {
         //
     }

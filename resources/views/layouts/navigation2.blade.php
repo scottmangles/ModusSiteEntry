@@ -1,5 +1,5 @@
 
-<body class="bg-[url('unsplash.jpg')] bg-cover" x-data="{ openMenu : false }"
+<body class="bg-cover" x-data="{ openMenu : false }"
 :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
 
 <style>
