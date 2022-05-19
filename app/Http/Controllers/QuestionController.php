@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Question;
 
 class QuestionController extends Controller
 {
@@ -13,7 +14,11 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('questions.index');
+        $questions = Question::all();
+
+        return view('questions.index')->with([
+            'questions' => $questions,
+        ]);
     }
 
     /**

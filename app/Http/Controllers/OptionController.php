@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Option;
 
 class OptionController extends Controller
 {
@@ -13,7 +14,11 @@ class OptionController extends Controller
      */
     public function index()
     {
-        //
+        $options = Option::all();
+
+        return view('options.index')->with([
+            'options' => $options,
+        ]);
     }
 
     /**
