@@ -16,6 +16,9 @@
           <tr>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Id</th>
             <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Option</th>
+            <th scope="col" class="flex items-center justify-center py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Question number</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Question</th>
+            <th scope="col" class="flex items-center justify-center py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Points</th>
             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
               <span class="sr-only">Edit</span>
             </th>
@@ -27,11 +30,14 @@
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-900 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">
               {{ $option->id }}
               <dl class="font-normal lg:hidden">
-                <dt class="sr-only">Title</dt>
+                <dt class="sr-only">Option name</dt>
                 <dd class="mt-1 text-gray-700 truncate">{{ $option->option_name }}</dd>
               </dl>
             </td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $option->option_name }}</td>
+            <td class="flex items-center justify-center px-3 py-4 text-sm text-gray-500">{{ $option->question->id }}</td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $option->question->question_name }}</td>
+            <td class="flex items-center justify-center px-3 py-4 text-sm text-gray-500">{{ $option->points }}</td>
             <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
               <a href="#" class="text-[#173a68] hover:text-blue-800">Edit</a>
               <a href="#" class="ml-4 text-red-600 hover:text-red-900">Delete</a>
