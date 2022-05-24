@@ -7,7 +7,7 @@
         <p class="mt-2 text-sm text-gray-700">A list of all the options, please allow 4 per question and only allow 1 correct option per question</p>
       </div>
       <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-        <x-button-link>Add option</x-button-link>
+        <x-button-link href="{{ route('options.create') }}">Add option</x-button-link>
       </div>
     </div>
     <div class="mt-8 -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
@@ -39,8 +39,15 @@
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $option->question->question_name }}</td>
             <td class="flex items-center justify-center px-3 py-4 text-sm text-gray-500">{{ $option->points }}</td>
             <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
-              <a href="#" class="text-[#173a68] hover:text-blue-800">Edit</a>
-              <a href="#" class="ml-4 text-red-600 hover:text-red-900">Delete</a>
+              <a href="{{ route('options.edit', ['option' => $option->id]) }}" class="text-[#173a68] hover:text-blue-800">Edit</a>
+            </td>
+            <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
+              <form action="{{ route('options.destroy', $option->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+            
+                <button type="submit" onclick="return confirm('Are you sure?')" class="ml-4 text-red-600 hover:text-red-900">Delete</button>
+            </form>
             </td>
           </tr>
           @endforeach

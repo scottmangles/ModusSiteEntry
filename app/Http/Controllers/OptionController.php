@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OptionsRequest;
+use App\Http\Requests\UpdateOptionsRequest;
 use Illuminate\Http\Request;
 use App\Models\Option;
+use App\Models\Question;
+use App\Http\Requests\OptionRequest;
 
 class OptionController extends Controller
 {
@@ -28,7 +32,11 @@ class OptionController extends Controller
      */
     public function create()
     {
-        //
+        $questions = Question::all();
+
+        return view('options.create')->with([
+            'questions' => $questions,
+        ]);
     }
 
     /**
@@ -37,9 +45,14 @@ class OptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OptionRequest $request)
     {
-        //
+       // dd($request->validated());
+       $option = Option::create($request->validated());
+
+       return $this->index('options.index')->with([
+        'message_success' => "Option added to database."
+    ]);
     }
 
     /**
