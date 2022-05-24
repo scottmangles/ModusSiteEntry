@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Http\Requests\QuestionRequest;
 
 class QuestionController extends Controller
 {
@@ -15,6 +16,8 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = Question::all();
+
+       // $deletedQuestions = Question::onlyTrashed()->get();
 
         return view('questions.index')->with([
             'questions' => $questions,
@@ -28,7 +31,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('questions.create');
     }
 
     /**
@@ -37,9 +40,14 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
-        //
+       // dd($request->validated());
+       $question = Question::create($request->validated());
+
+       return $this->index('questions.index')->with([
+        'message_success' => "Question added to database."
+    ]);
     }
 
     /**
@@ -48,9 +56,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Question $question)
     {
-        //
+        //dd('show blade');
     }
 
     /**
@@ -59,9 +67,11 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        //
+        return view('questions.edit')->with([
+            'question' => $question,
+        ]);
     }
 
     /**
@@ -71,9 +81,19 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuestionRequest $request, Question $question)
     {
-        //
+       //dd($request->validated());
+       $question = $request->question;
+
+       $question->fill($request->validated());
+       $question->save();
+
+       return redirect()
+        ->route('questions.index')
+        ->with([
+            'message_success' => "Question $question->id updated in database."
+        ]);
     }
 
     /**
@@ -82,8 +102,14 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        //
+        $oldQuestion = $question->question_name;
+
+        $question->delete();
+
+        return $this->index()->with([
+            'message_success' => "Question $oldQuestion was deleted"
+        ]);
     }
 }
