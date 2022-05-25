@@ -72,9 +72,14 @@ class OptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Option $option)
     {
-        //
+        $questions = Question::all();  
+
+        return view('options.edit')->with([
+            'option' => $option,
+            'questions' => $questions,
+        ]);
     }
 
     /**
@@ -84,9 +89,18 @@ class OptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OptionRequest $request, Option $option)
     {
-        //
+        $option = $request->option;
+
+       $option->fill($request->validated());
+       $option->save();
+        
+        return redirect()
+        ->route('options.index')
+        ->with([
+            'message_success' => "Option $option->id updated in database."
+        ]);
     }
 
     /**
@@ -95,8 +109,16 @@ class OptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Option $option)
     {
-        //
+        $oldOption = $option->option_name;
+
+        $option->delete();
+
+        return redirect()
+        ->route('options.index')
+        ->with([
+            'message_success' => "option $oldOption was deleted"
+        ]);
     }
 }

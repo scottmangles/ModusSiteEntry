@@ -15,7 +15,8 @@ class AddRelationshipFieldsToResultsTable extends Migration
     {
         Schema::table('results', function (Blueprint $table) {
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('cascade');
         });
     }
 

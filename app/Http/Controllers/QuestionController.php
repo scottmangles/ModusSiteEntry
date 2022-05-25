@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Http\Requests\QuestionRequest;
+use App\Models\Option;
 
 class QuestionController extends Controller
 {
@@ -106,10 +107,30 @@ class QuestionController extends Controller
     {
         $oldQuestion = $question->question_name;
 
-        $question->delete();
+        //find if any options are related to question and abort
+        $options = Option::where('question_id', $question->id)->get();
 
-        return $this->index()->with([
-            'message_success' => "Question $oldQuestion was deleted"
-        ]);
+        //dd($options);
+
+        if($options->isNotEmpty()) {
+           // dd("options for question id $question->id require deleting before question can be deleted");
+           return redirect()
+            ->route('questions.index')
+            ->with([
+                'message_warning' => "options for question id $question->id require deleting before question can be deleted"
+            ]);
+        }
+
+        else {
+            $question->delete();
+
+            return redirect()
+            ->route('questions.index')
+            ->with([
+                'message_success' => "Question $oldQuestion was deleted"
+            ]);
+        }
+
+        
     }
 }
