@@ -29,7 +29,7 @@ Route::get('/dashboard', function () {
 Route::resource('site_inductions', SiteInductionController::class);
 Route::resource('questions', QuestionController::class);
 Route::resource('options', OptionController::class);
-Route::resource('results', ResultController::class);
-Route::resource('quizes', QuizController::class);
+Route::resource('results', ResultController::class)->only(['index']);
+Route::resource('quizes', QuizController::class)->only(['create', 'store']);
 
 require __DIR__.'/auth.php';
