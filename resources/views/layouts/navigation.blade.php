@@ -235,7 +235,12 @@
         <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
            <!-- Page Content -->
            <main>
-            {{ $slot }}
+             <!-- Validation Errors -->
+            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+            <!-- Success and warning message -->
+            <x-alert/>
+                {{ $slot }}
+         
           </main>
           <!-- End page content -->
         </div>

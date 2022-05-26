@@ -99,7 +99,7 @@ class OptionController extends Controller
         return redirect()
         ->route('options.index')
         ->with([
-            'message_success' => "Option $option->id updated in database."
+            'success' => "Option " . $option->id . " updated in database."
         ]);
     }
 
@@ -118,7 +118,7 @@ class OptionController extends Controller
         return redirect()
         ->route('options.index')
         ->with([
-            'message_success' => "option $oldOption was deleted"
+            'success' => "option " . $oldOption . " was deleted"
         ]);
     }
 }

@@ -65,14 +65,16 @@ class QuizController extends Controller
             return redirect()
                 ->route('dashboard')
                 ->with([
-                    'success_message' => "Congratulations you've passed your site induction"
+                    'success' => "Congratulations you've passed your site induction"
                 ]);
 
         } else {
             return redirect()
                 ->route('dashboard')
                 ->with([
-                    'warning_message' => "You've failed your site induction questionnaire, you scored $options->sum('points') points, 5 correct answers are required to pass"
+                    'warning' => "You've failed your site induction questionnaire, you scored " . $options->sum('points') . " points, 5 correct answers are required to pass.  
+                    Please complete the site induction before attempting to sign into site"
+                    
                 ]);
             
           }

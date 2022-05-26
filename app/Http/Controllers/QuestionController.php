@@ -47,7 +47,7 @@ class QuestionController extends Controller
        $question = Question::create($request->validated());
 
        return $this->index('questions.index')->with([
-        'message_success' => "Question added to database."
+        'success' => "Question added to database."
     ]);
     }
 
@@ -93,7 +93,7 @@ class QuestionController extends Controller
        return redirect()
         ->route('questions.index')
         ->with([
-            'message_success' => "Question $question->id updated in database."
+            'success' => "Question " . $question->id . " updated in database."
         ]);
     }
 
@@ -117,7 +117,7 @@ class QuestionController extends Controller
            return redirect()
             ->route('questions.index')
             ->with([
-                'message_warning' => "options for question id $question->id require deleting before question can be deleted"
+                'warning' => "options for question id " . $question->id . " require deleting before question can be deleted"
             ]);
         }
 
@@ -127,7 +127,7 @@ class QuestionController extends Controller
             return redirect()
             ->route('questions.index')
             ->with([
-                'message_success' => "Question $oldQuestion was deleted"
+                'success' => "Question " . $oldQuestion . " was deleted"
             ]);
         }
 

@@ -22,7 +22,7 @@
             <!-- Layout continues on nav blade for alignment purposes -->
         @livewireScripts
            @include('layouts.navigation')
-
+            
            
         </div>
     </body>
