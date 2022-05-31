@@ -28,6 +28,7 @@ class User extends Authenticatable
         'cscs_number',
         'password',
         'induction_completed',
+        'induction_expires',
     ];
 
     /**

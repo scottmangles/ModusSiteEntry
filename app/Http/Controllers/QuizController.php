@@ -60,12 +60,13 @@ class QuizController extends Controller
 
             $user->update([
                 'induction_completed' => now(),
+                'induction_expires' => now()->addDays(364),
             ]);
 
             return redirect()
                 ->route('dashboard')
                 ->with([
-                    'success' => "Congratulations you've passed your site induction"
+                    'success' => "Congratulations you've passed your site induction.  Expiry is shown in your dashboard."
                 ]);
 
         } else {
