@@ -55,4 +55,14 @@ class User extends Authenticatable
         return $this->hasMany(Result::class, 'user_id', 'id');
     }
 
+    public function sites()
+    {
+        return $this->hasMany(Site::class, 'site_id', 'id');
+    }
+
+    public function siteInductions()
+    {
+        return $this->hasMany(SiteInduction::class, 'user_id', 'id');
+    }
+
 }

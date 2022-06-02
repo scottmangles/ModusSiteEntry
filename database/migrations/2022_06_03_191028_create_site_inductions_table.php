@@ -14,8 +14,17 @@ class CreateSiteInductionsTable extends Migration
     public function up()
     {
         Schema::create('site_inductions', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('site_id')->unsigned();
+            $table->string('status');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade');
+            $table->foreign('site_id')->references('id')->on('sites')
+                ->onDelete('cascade');
+
+            $table->primary(['site_id', 'user_id']);
         });
     }
 
