@@ -55,9 +55,10 @@ class User extends Authenticatable
         return $this->hasMany(Result::class, 'user_id', 'id');
     }
 
-    public function sites()
-    {
-        return $this->hasMany(Site::class, 'site_id', 'id');
+    public function sites(){
+        return $this->belongsToMany('App\Models\Site', 'site_users')
+            ->withPivot('status', 'id', 'time_on_site', 'time_off_site')
+            ->orderBy('id');
     }
 
     public function siteInductions()

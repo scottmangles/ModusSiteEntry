@@ -32,14 +32,31 @@ class SiteUserController extends Controller
             ->where('status', 'on site')
             ->get();
 
+           // dd($siteUserIds);
+
+        
+
         foreach($siteUserIds as $siteUserId){
             $siteUserId;
         }
 
-        //$site_user_id = intval($siteUserId);
+        if (isset($siteUserId)) {
+        
+            //$site_user_id = intval($siteUserId);
 
-        //dd($siteUserId->id, $user_id, $site_id);
-        return redirect()->route('signoutsite', [$siteUserId, $user_id, $site_id]);
+            //dd($siteUserId->id, $user_id, $site_id);
+            return redirect()->route('signoutsite', [$siteUserId, $user_id, $site_id]);
+            
+        }
+
+        return redirect()
+            ->route('dashboard')
+            ->with([
+                'warning' => "You are not currently signed into any sites 
+                please sign in",
+            ]);
+
+        
     }
 
     public function attachSiteUser($user_id, $site_id) {
@@ -57,8 +74,10 @@ class SiteUserController extends Controller
         foreach($siteUsers as $siteUser){
             if ($siteUser->status == 'on site') {
                 $onSite = true;
-                return view('home')->with([
-                    'message_warning' => "You cannot sign into multiple sites 
+                return redirect()
+                ->route('dashboard')
+                ->with([
+                    'warning' => "You cannot sign into multiple sites 
                     please sign out of current site first",
                     'sites' => $sites,
                     'user' => $user,
@@ -71,12 +90,14 @@ class SiteUserController extends Controller
         //dd($site_id, $user_id);
         $onSite = true;
 
-        return view('home')->with([
-            'message_success' => "You are signed into <b>" . $site->name . "</b> site",
-            'sites' => $sites,
-            'user' => $user,
-            'onSite' => $onSite
-            ]);
+        return redirect()
+            ->route('dashboard')
+            ->with([
+                'success' => "You are signed into " . $site->name . " site",
+                'sites' => $sites,
+                'user' => $user,
+                'onSite' => $onSite
+                ]);
     }
 
     public function signOutSiteUser($site_pivot_id, $user_id, $site_id) {
@@ -87,11 +108,13 @@ class SiteUserController extends Controller
 
         $siteUser = SiteUser::find($site_pivot_id);
            $siteUser->update(['status' => 'off site', 'time_off_site' => Carbon::now()]);
-         return view('/home')->with([
-             'message_success' => "You are signed out of <b>" . $site->name . "</b> site",
-             'sites' => $sites,
-            'user' => $user
-        ]);
+         return redirect()
+            ->route('dashboard')
+            ->with([
+                'success' => "You are signed out of " . $site->name . " site",
+                'sites' => $sites,
+                'user' => $user
+            ]);
      }
 
      public function manualSiteEntry(Request $request) {
@@ -108,12 +131,14 @@ class SiteUserController extends Controller
     foreach($siteUsers as $siteUser){
         if ($siteUser->status == 'on site') {
             $onSite = true;
-            return view('home')->with([
-                'message_warning' => "You cannot sign into multiple sites 
-                please sign out of current site first",
-                'user' => $user,
-                'onSite' => $onSite
-            ]);
+            return redirect()
+                ->route('dashboard')
+                ->with([
+                    'warning' => "You cannot sign into multiple sites 
+                    please sign out of current site first",
+                    'user' => $user,
+                    'onSite' => $onSite
+                ]);
         }
     }
 
@@ -134,10 +159,12 @@ class SiteUserController extends Controller
 
             $onSite = true;
 
-            return view('home')->with([
-            'message_success' => "You are signed into <b>" . $site->name . "</b> site",
-            'user' => $user,
-            'onSite' => $onSite
-            ]);
+            return redirect()
+                ->route('dashboard')
+                ->with([
+                'success' => "You are signed into " . $site->name . " site",
+                'user' => $user,
+                'onSite' => $onSite
+                ]);
         }
 }
