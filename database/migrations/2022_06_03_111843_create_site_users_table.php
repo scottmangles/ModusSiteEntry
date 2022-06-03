@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSiteUserTable extends Migration
+class CreateSiteUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSiteUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('site_user', function (Blueprint $table) {
+        Schema::create('site_users', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('site_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
@@ -39,6 +39,6 @@ class CreateSiteUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('site_user');
+        Schema::dropIfExists('site_users');
     }
 }
