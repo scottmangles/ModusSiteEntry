@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+    public function __construct()
+    {
+        session(['url.intended' => url()->previous()]);
+        $this->redirectTo = session()->get('url.intended');
+
+    }
+
     /**
      * Display the login view.
      *
@@ -31,6 +38,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+       // dd(session('url.intended'));
+
+        if (session('url.intended') != null) {
+            $this->redirectTo = session()->get('url.intended');
+
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

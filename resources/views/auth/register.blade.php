@@ -60,7 +60,7 @@
                  <div class="mt-2">
                     <x-label for="cscs_number" :value="__('Cscs Card Number (optional)')" />
     
-                    <x-input id="cscs_number" class="block w-full mt-1" type="text" name="cscs_number" :value="old('cscs_number')" required autofocus />
+                    <x-input id="cscs_number" class="block w-full mt-1" type="text" name="cscs_number" :value="old('cscs_number')" autofocus />
                   </div>
 
                  <!-- Password -->
