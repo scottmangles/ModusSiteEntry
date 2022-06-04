@@ -61,7 +61,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME)->with([
-            'success' => 'please conduct a site induction before proceeding to sign into site',
+            'info' => 'please conduct a site induction before proceeding to sign into site',
         ]);
     }
 }
