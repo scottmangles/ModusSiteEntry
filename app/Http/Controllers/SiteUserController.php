@@ -71,6 +71,7 @@ class SiteUserController extends Controller
             
         $sites = Site::all();
         
+        //check user is not currently signed into any other site
         foreach($siteUsers as $siteUser){
             if ($siteUser->status == 'on site') {
                 $onSite = true;
@@ -85,7 +86,20 @@ class SiteUserController extends Controller
                 ]);
             }
         }
-
+            //check company induction is in date
+            if ($user->induction_expires == null or $user->induction_expires <= Carbon::now()) {
+                
+                return redirect()
+                ->route('dashboard')
+                ->with([
+                    'warning' => "Your induction status is not in date, 
+                    please complete your site induction before signing into site",
+                    'sites' => $sites,
+                    'user' => $user,
+                ]);
+            }
+        
+        //sign user into site with current time and date
         $user->sites()->attach($site_id, ['status' => 'on site', 'time_on_site' => Carbon::now()]);
         //dd($site_id, $user_id);
         $onSite = true;

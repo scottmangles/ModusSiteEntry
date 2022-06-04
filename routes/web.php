@@ -42,9 +42,9 @@ Route::get('/userfind/site/{site_id}', [App\Http\Controllers\SiteUserController:
 //Find user id and pass perameter to sign out of construction site function
 Route::get('/userfind/site/{site_id}/out', [App\Http\Controllers\SiteUserController::class, 'findUserIdOut'])->middleware('auth');
 
-//sign user into building site
+//sign user into construction site
 Route::get('/user/{user_id}/site/{site_id}/signin', [App\Http\Controllers\SiteUserController::class, 'attachSiteUser'])->middleware('auth')->name('signinsite');
-//sign user out of building site
+//sign user out of construction site
 Route::get('/id/{site_pivot_id}/user/{user_id}/site/{site_id}/signout', [App\Http\Controllers\SiteUserController::class, 'signOutSiteUser'])->middleware('auth')->name('signoutsite');
 
 Route::post('/site/mansignin', [App\Http\Controllers\SiteUserController::class, 'manualSiteEntry'])->middleware('auth')->name('manualSignIn');
