@@ -47,6 +47,8 @@ Route::get('/user/{user_id}/site/{site_id}/signin', [App\Http\Controllers\SiteUs
 //sign user out of construction site
 Route::get('/id/{site_pivot_id}/user/{user_id}/site/{site_id}/signout', [App\Http\Controllers\SiteUserController::class, 'signOutSiteUser'])->middleware('auth')->name('signoutsite');
 
+Route::get('/id/{site_pivot_id}/user/{user_id}/site/{site_id}/signoutsitemanager', [App\Http\Controllers\SiteUserController::class, 'signOutSiteManager'])->middleware('auth')->name('signoutsitemanager');
+
 Route::post('/site/mansignin', [App\Http\Controllers\SiteUserController::class, 'manualSiteEntry'])->middleware('auth')->name('manualSignIn');
 
 require __DIR__.'/auth.php';

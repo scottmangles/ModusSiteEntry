@@ -16,4 +16,14 @@ class SiteUser extends Model
         'time_on_site', 
         'time_off_site'
     ];
+
+    public function sites(){
+        return $this->belongsToMany('App\Models\Site');
+    }
+
+    public function users(){
+        return $this->hasMany('App\Models\User', 'id', 'user_id');
+    }
+
+    
 }

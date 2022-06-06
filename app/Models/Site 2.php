@@ -17,18 +17,13 @@ class Site extends Model
         'updated_at',
     ];
 
-    public function users(){
-        return $this->belongsToMany('App\Models\User', 'site_users')
-            ->withPivot('status', 'id', 'time_on_site', 'time_off_site')
-            ->orderBy('id');
+    public function users()
+    {
+        return $this->hasMany(User::class, 'user_id', 'id');
     }
 
     public function siteInductions()
     {
         return $this->hasMany(SiteInduction::class, 'site_id', 'id');
-    }
-
-    public function siteUsers(){
-        return $this->hasMany('App\Models\SiteUser', 'id', 'site_id');
     }
 }

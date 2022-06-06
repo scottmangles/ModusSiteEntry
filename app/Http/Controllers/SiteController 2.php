@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSiteRequest;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
-use App\Models\User;
-use Illuminate\Support\Carbon;
-use App\Models\SiteUser;
 
 class SiteController extends Controller
 {
@@ -49,29 +46,8 @@ class SiteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Site $site)
-    {   
-        $users = User::all();
-
-        $onSites = SiteUser::select()
-            ->where([['status', '=', 'on site'],
-                ['site_id', '=', $site->id]
-            ])
-            ->get();
-
-        $offSites = SiteUser::select()
-            ->WhereDate('time_off_site', Carbon::today())
-            ->where([['status', '=', 'off site'],
-                ['site_id', '=', $site->id],])
-            ->get();
-
-       // dd($onSites);
-
-        return view('sites.show')->with([
-            'site' => $site,
-            'users' => $users,
-            'onSites' => $onSites,
-            'offSites' => $offSites,
-        ]);
+    {
+        //
     }
 
     /**

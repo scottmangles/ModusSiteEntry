@@ -66,4 +66,8 @@ class User extends Authenticatable
         return $this->hasMany(SiteInduction::class, 'user_id', 'id');
     }
 
+    public function siteUsers(){
+        return $this->belongsToMany('App\Models\SiteUser');
+    }
+
 }

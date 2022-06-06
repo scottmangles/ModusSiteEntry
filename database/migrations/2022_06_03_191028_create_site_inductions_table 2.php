@@ -17,8 +17,6 @@ class CreateSiteInductionsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('site_id')->unsigned();
             $table->string('status');
-            $table->bigInteger('completed_by');
-            $table->text('notes');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

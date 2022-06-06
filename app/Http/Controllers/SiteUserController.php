@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\SiteInduction;
 
 class SiteUserController extends Controller
 {
@@ -98,6 +99,30 @@ class SiteUserController extends Controller
                     'user' => $user,
                 ]);
             }
+
+            //check user entry status for individual site, if access granted, access warning or access denied by site manager
+            $checkEntryStatus = SiteInduction::select()
+                ->where([
+                    ['site_id', $site->id],
+                    ['user_id', $user->id]
+                    ])
+                ->first();
+
+    
+                
+           // dd($checkEntryStatus);
+
+            if ($checkEntryStatus == 'access denied' or $checkEntryStatus == null) {
+                // return warning not granted access by site manager
+                return redirect()
+                ->route('dashboard')
+                ->with([
+                'warning' => "You do not have the correct permissions to enter " . $site->name . " site, please contact the site manager to gain access to site",
+                'sites' => $sites,
+                'user' => $user,
+                ]);
+            }
+        
         
         //sign user into site with current time and date
         $user->sites()->attach($site_id, ['status' => 'on site', 'time_on_site' => Carbon::now()]);
@@ -130,6 +155,22 @@ class SiteUserController extends Controller
                 'user' => $user
             ]);
      }
+
+
+     public function signOutSiteManager($site_pivot_id, $user_id, $site_id) {
+        $user = User::find($user_id);
+        $site = Site::find($site_id);
+
+        $sites = Site::all();
+
+       $siteUser = SiteUser::find($site_pivot_id);
+          $siteUser->update(['status' => 'off site', 'time_off_site' => Carbon::now()]);
+        return back()
+           ->with([
+               'success' => "You have signed " . $user->name . " out of " . $site->name . " site",
+              
+           ]);
+    }
 
      public function manualSiteEntry(Request $request) {
         $user_id = Auth::user()->id;
