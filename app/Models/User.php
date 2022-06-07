@@ -70,4 +70,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\SiteUser');
     }
 
+    public function siteManager(){
+        return $this->belongsTo('App\Models\Site', 'site_manager', 'id');
+    }
+
 }

@@ -12,11 +12,14 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-
+ 
         $user = User::find(auth()->id());
-        $sites = Site::all();
         $siteInductions = SiteInduction::where('user_id', auth()->id())->get();
 
+        $sites = Site::all();
+    
+
+       // dd($sites);
         //dd($siteInductions);
     return view('dashboard')->with([
         'user' => $user,

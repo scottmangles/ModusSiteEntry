@@ -31,4 +31,8 @@ class Site extends Model
     public function siteUsers(){
         return $this->hasMany('App\Models\SiteUser', 'id', 'site_id');
     }
+
+    public function siteManager(){
+        return $this->hasOne('App\Models\User', 'id', 'site_manager');
+    }
 }

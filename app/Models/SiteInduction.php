@@ -17,14 +17,14 @@ class SiteInduction extends Model
         'updated_at',
     ];
 
-    public function inductionSites()
+    public function sites()
     {
-        return $this->hasMany(Site::class, 'site_id', 'id');
+        return $this->belongsTo(Site::class, 'site_id', 'id');
     }
 
     public function users()
     {
-        return $this->hasMany(User::class, 'user_id', 'id');
+        return $this->BelongsTo(User::class, 'user_id', 'id');
     }
 
 }

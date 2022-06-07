@@ -16,9 +16,13 @@ class CreateSitesTable extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->bigInteger('site_manager')->unsigned();
             $table->time('open_at');
             $table->time('closed_at');
             $table->timestamps();
+
+            $table->foreign('site_manager')->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

@@ -1,5 +1,5 @@
 <x-app-layout>
-  
+   
   <div class="px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
@@ -100,7 +100,7 @@
         </table>
       </div>
    <br>
-  
+           
       <h2 class="mt-5 text-xl font-semibold text-gray-900">Site Access</h2>
     <div class="mt-8 -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
       <table class="min-w-full divide-y divide-gray-300">
@@ -114,12 +114,23 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-         
-          
-          <tr>
-            <td class="px-3 py-4 text-sm text-gray-500">Corby</td>
-            <td class="py-4 pl-3 pr-4 text-sm font-medium">
+          @foreach ($user->siteInductions as $siteInduction)
 
+          <tr>
+            <td class="px-3 py-4 text-sm text-gray-500">{{ $siteInduction->status }}</td>
+            <td class="py-4 pl-3 pr-4 text-sm font-medium">
+              
+              @if ($siteInduction->status == 'access granted' or $siteInduction->status == 'access warning')
+                <div class="flex items-center justify-between py-4 group hover:bg-gray-50">
+                    <span class="flex items-center space-x-3 truncate">
+                        <span class="w-2.5 h-2.5 flex-shrink-0 rounded-full bg-green-600" aria-hidden="true"></span>
+                        <span class="text-sm font-medium leading-6 truncate">
+                          Access granted
+                        </span>
+                    </span>
+                </div>
+              </td>
+           @else
             <div class="flex items-center justify-between py-4 group hover:bg-gray-50">
               <span class="flex items-center space-x-3 truncate">
                 <span class="w-2.5 h-2.5 flex-shrink-0 rounded-full bg-red-600" aria-hidden="true"></span>
@@ -128,7 +139,9 @@
                 </span>
               </span>
             </div>
-            </td>
+            @endif
+          </td>
+
             <td class="px-3 py-4 text-sm text-gray-500">Joe Bloggs</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">07756486754</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">joebloggs@modus.co.uk</td>
@@ -139,6 +152,7 @@
               </dl>
             </td>
           </tr>
+          @endforeach
 
           <tr>
             <td class="px-3 py-4 text-sm text-gray-500">Matlock</td>

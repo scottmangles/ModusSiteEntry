@@ -17,13 +17,15 @@ class CreateSiteInductionsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('site_id')->unsigned();
             $table->string('status');
-            $table->bigInteger('completed_by');
+            $table->bigInteger('completed_by')->unsigned();;
             $table->text('notes');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade');
             $table->foreign('site_id')->references('id')->on('sites')
+                ->onDelete('cascade');
+            $table->foreign('completed_by')->references('id')->on('users')
                 ->onDelete('cascade');
 
             $table->primary(['site_id', 'user_id']);
