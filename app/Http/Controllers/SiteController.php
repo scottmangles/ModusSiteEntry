@@ -8,6 +8,7 @@ use App\Models\Site;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use App\Models\SiteUser;
+use Symfony\Component\HttpFoundation\Request;
 
 class SiteController extends Controller
 {
@@ -18,7 +19,12 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        $sites = Site::all();
+
+        
+        return view('sites.index')->with([
+            'sites' => $sites,
+        ]);
     }
 
     /**
@@ -28,7 +34,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('sites.create');
     }
 
     /**
@@ -37,9 +43,9 @@ class SiteController extends Controller
      * @param  \App\Http\Requests\StoreSiteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSiteRequest $request)
+    public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -105,6 +111,8 @@ class SiteController extends Controller
      */
     public function destroy(Site $site)
     {
-        //
+        return redirect()
+            ->route('sites.index')
+            ->withWarning("you do not have permission to delete " . $site->name . " please contact database administrator");
     }
 }

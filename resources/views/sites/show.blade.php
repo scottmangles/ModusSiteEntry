@@ -8,7 +8,7 @@
             <p>{{ Carbon\Carbon::parse(now())->format('D d M') }}</p>
           </div>
           <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-
+ 
 
             <div x-data="{ open: false }">
               <x-button-link-small @click="open = ! open">Sign Personel On Site</x-button-link-small>

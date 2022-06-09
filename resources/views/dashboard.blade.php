@@ -109,15 +109,15 @@
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Site Name</th>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Status</th>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Site Manager</th>
-            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Contact Number</th>
-            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Contact Email</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Contact Number</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Contact Email</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:hidden">Contact</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           @foreach ($user->siteInductions as $siteInduction)
-
           <tr>
-            <td class="px-3 py-4 text-sm text-gray-500">{{ $siteInduction->status }}</td>
+            <td class="px-3 py-4 text-sm text-gray-500">{{ $siteInduction->sites->name }}</td>
             <td class="py-4 pl-3 pr-4 text-sm font-medium">
               
               @if ($siteInduction->status == 'access granted' or $siteInduction->status == 'access warning')
@@ -142,44 +142,41 @@
             @endif
           </td>
 
-            <td class="px-3 py-4 text-sm text-gray-500">Joe Bloggs</td>
-            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">07756486754</td>
-            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">joebloggs@modus.co.uk</td>
+            <td class="px-3 py-4 text-sm text-gray-500">{{ $siteInduction->sites->siteManager->name }}</td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $siteInduction->sites->siteManager->mobile }}</td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $siteInduction->sites->siteManager->email }}</td>
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-900 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">
               <dl class="font-normal lg:hidden">
-                <dt class="mt-1 text-gray-500 truncate">07756486754</dt>
-                <dd class="mt-1 text-gray-500 truncate">joebloggs@modus.co.uk</dd>
+                <dt class="mt-1 text-gray-500 truncate">{{ $siteInduction->sites->siteManager->mobile }}</dt>
+                <dd class="mt-1 text-gray-500 truncate">{{ $siteInduction->sites->siteManager->email }}</dd>
               </dl>
             </td>
           </tr>
           @endforeach
-
+          @foreach ($sites as $site)
           <tr>
-            <td class="px-3 py-4 text-sm text-gray-500">Matlock</td>
+            <td class="px-3 py-4 text-sm text-gray-500">{{ $site->name }}</td>
             <td class="py-4 pl-3 pr-4 text-sm font-medium">
-              
-             <div class="flex items-center justify-between py-4 group hover:bg-gray-50">
+            <div class="flex items-center justify-between py-4 group hover:bg-gray-50">
               <span class="flex items-center space-x-3 truncate">
-                <span class="w-2.5 h-2.5 flex-shrink-0 rounded-full bg-green-600" aria-hidden="true"></span>
+                <span class="w-2.5 h-2.5 flex-shrink-0 rounded-full bg-red-600" aria-hidden="true"></span>
                 <span class="text-sm font-medium leading-6 truncate">
-                  Access Granted
+                  Contact site manager
                 </span>
               </span>
             </div>
-
-
-            </td>
-            <td class="px-3 py-4 text-sm text-gray-500">John Smith</td>
-            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">07575978576</td>
-            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">johnsmith@modus.co.uk</td>
+          </td>
+            <td class="px-3 py-4 text-sm text-gray-500">{{ $site->siteManager->name }}</td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $site->siteManager->mobile }}</td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $site->siteManager->email }}</td>
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-900 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">
               <dl class="font-normal lg:hidden">
-                <dt class="mt-1 text-gray-500 truncate">07756486754</dt>
-                <dd class="mt-1 text-gray-500 truncate">joebloggs@modus.co.uk</dd>
+                <dt class="mt-1 text-gray-500 truncate">{{ $site->siteManager->mobile }}</dt>
+                <dd class="mt-1 text-gray-500 truncate">{{ $site->siteManager->email }}</dd>
               </dl>
             </td>
           </tr>
-          
+          @endforeach
         </tbody>
       </table>
     </div>

@@ -33,6 +33,6 @@ class Site extends Model
     }
 
     public function siteManager(){
-        return $this->hasOne('App\Models\User', 'id', 'site_manager');
+        return $this->hasOne(User::class, 'id', 'site_manager');
     }
 }

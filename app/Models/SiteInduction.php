@@ -13,6 +13,8 @@ class SiteInduction extends Model
         'user_id',
         'site_id',
         'status',
+        'completed_by',
+        'notes',
         'created_at',
         'updated_at',
     ];
@@ -28,3 +30,4 @@ class SiteInduction extends Model
     }
 
 }
+ 
