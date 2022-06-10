@@ -18,16 +18,20 @@ class SiteInduction extends Model
         'created_at',
         'updated_at',
     ];
-
+ 
     public function sites()
     {
         return $this->belongsTo(Site::class, 'site_id', 'id');
     }
 
-    public function users()
+    public function user()
     {
-        return $this->BelongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function userBanned()
+    {
+        return $this->belongsTo(User::class, 'completed_by', 'id');
+    }
 }
  

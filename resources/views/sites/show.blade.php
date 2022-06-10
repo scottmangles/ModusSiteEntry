@@ -159,6 +159,52 @@
           </tbody>
         </table>
       </div>
+
+      <br>
+
+      <h2 class="mt-5 text-xl font-semibold text-gray-900">Contractors Banned From Site Site</h2>
+      <p class="mt-2 text-sm text-gray-700">currently XXXX personel banned from {{ $site->name }} site</p>
+  
+      <div class="mt-8 -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">User id</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Sub contractor</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Date banned</th>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Banned By</th>
+                <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"></th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              @foreach ($bannedSites as $bannedSite)
+              <tr>
+                  
+                  <td class="px-3 py-4 text-sm text-gray-500">
+                    <div class="flex items-center justify-between py-4 group hover:bg-gray-50">
+                        <span class="flex items-center space-x-3 truncate">
+                            <span class="w-2.5 h-2.5 flex-shrink-0 rounded-full bg-red-600" aria-hidden="true"></span>
+                            <span class="text-sm font-medium leading-6 truncate">
+                                  {{ $bannedSite->user->id }}
+                            </span>
+                        </span>
+                    </div>
+                  </td>
+                  
+               <td class="px-3 py-4 text-sm text-gray-500">{{ $bannedSite->user->name }}</td>
+               <td class="px-3 py-4 text-sm text-gray-500">{{ $bannedSite->user->sub_contractor }}</td>
+               <td class="px-3 py-4 text-sm text-gray-500">{{ $bannedSite->created_at }}</td>
+               <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $bannedSite->userBanned->name }}</td>
+               <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><x-button-link-small>View details</x-button-link-small></td>
+              </tr>
+              @endforeach
+    
+             
+            </tbody>
+          </table>
+        </div>
+
     </div>
   </div>
 </x-app-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSiteRequest;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
+use App\Models\SiteInduction;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use App\Models\SiteUser;
@@ -70,6 +71,11 @@ class SiteController extends Controller
                 ['site_id', '=', $site->id],])
             ->get();
 
+        $bannedSites = SiteInduction::select()
+            ->where([['status', '=', 'access denied'],
+                ['site_id', '=', $site->id],])
+            ->get();
+          //dd($bannedSites);
        // dd($onSites);
 
         return view('sites.show')->with([
@@ -77,6 +83,7 @@ class SiteController extends Controller
             'users' => $users,
             'onSites' => $onSites,
             'offSites' => $offSites,
+            'bannedSites' => $bannedSites,
         ]);
     }
 

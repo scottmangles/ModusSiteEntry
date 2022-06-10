@@ -66,6 +66,11 @@ class User extends Authenticatable
         return $this->hasMany(SiteInduction::class, 'user_id', 'id');
     }
 
+    public function siteBans()
+    {
+        return $this->hasMany(SiteInduction::class, 'completed_by', 'id');
+    }
+
     public function siteUsers(){
         return $this->belongsToMany('App\Models\SiteUser');
     }
