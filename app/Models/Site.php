@@ -11,6 +11,7 @@ class Site extends Model
 
     protected $fillable = [
         'name',
+        'site_manager',
         'open_at',
         'closed_at',
         'created_at',

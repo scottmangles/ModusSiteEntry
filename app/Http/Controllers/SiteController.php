@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSiteRequest;
-use App\Http\Requests\UpdateSiteRequest;
+use App\Http\Requests\SiteRequest;
 use App\Models\Site;
 use App\Models\SiteInduction;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use App\Models\SiteUser;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
+    public function __construct()
+    {
+       
+        $this->middleware('site_manager')->only(['show']);
+        $this->middleware('admin')->only(['index', 'create', 'edit', 'update', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +42,15 @@ class SiteController extends Controller
      */
     public function create()
     {
-        return view('sites.create');
+        $users = User::where(
+            'role', 'site_manager'
+            )->get();
+        
+       // dd($users);
+        
+        return view('sites.create')->with([
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -44,9 +59,15 @@ class SiteController extends Controller
      * @param  \App\Http\Requests\StoreSiteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SiteRequest $request)
     {
-        dd($request);
+        //dd($request->validated());
+        $site = Site::create($request->validated());
+
+        return redirect()
+            ->route('sites.index')
+            ->with(['success' => $site->name . " site added to database."
+        ]);
     }
 
     /**
@@ -95,7 +116,14 @@ class SiteController extends Controller
      */
     public function edit(Site $site)
     {
-        //
+        $users = User::where(
+            'role', 'site_manager'
+            )->get();
+
+        return view('sites.edit')->with([
+            'users' => $users,
+            'site' => $site,
+        ]);
     }
 
     /**
@@ -105,9 +133,14 @@ class SiteController extends Controller
      * @param  \App\Models\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSiteRequest $request, Site $site)
+    public function update(SiteRequest $request, Site $site)
     {
-        //
+        $site->update($request->validated());
+
+        return redirect()
+            ->route('sites.index')
+            ->with(['success' => $site->name . " site has been updated."
+        ]);
     }
 
     /**

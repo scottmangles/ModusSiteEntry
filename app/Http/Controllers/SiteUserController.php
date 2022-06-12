@@ -125,7 +125,10 @@ class SiteUserController extends Controller
         
         
         //sign user into site with current time and date
-        $user->sites()->attach($site_id, ['status' => 'on site', 'time_on_site' => Carbon::now()]);
+        $user->sites()->attach($site_id, [
+            'signed_in_by' => Auth::user()->id,
+            'status' => 'on site', 
+            'time_on_site' => Carbon::now()]);
         //dd($site_id, $user_id);
         $onSite = true;
 
@@ -164,7 +167,10 @@ class SiteUserController extends Controller
         $sites = Site::all();
 
        $siteUser = SiteUser::find($site_pivot_id);
-          $siteUser->update(['status' => 'off site', 'time_off_site' => Carbon::now()]);
+          $siteUser->update([
+              'signed_out_by' => Auth::user()->id,
+              'status' => 'off site',
+               'time_off_site' => Carbon::now()]);
         return back()
            ->with([
                'success' => "You have signed " . $user->name . " out of " . $site->name . " site",

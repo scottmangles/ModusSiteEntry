@@ -46,9 +46,10 @@ class QuestionController extends Controller
        // dd($request->validated());
        $question = Question::create($request->validated());
 
-       return $this->index('questions.index')->with([
-        'success' => "Question added to database."
-    ]);
+       return redirect()
+          ->route('questions.index')
+          ->with(['success' => "Question added to database."
+        ]);
     }
 
     /**

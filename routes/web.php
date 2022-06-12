@@ -29,7 +29,7 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(
 Route::get('/induction', [InductionController::class, 'induction'])->middleware(['auth'])->name('induction');
 
 
-Route::resource('sites', SiteController::class);
+Route::resource('sites', SiteController::class)->middleware('auth');
 Route::resource('site_inductions', SiteInductionController::class)->middleware(['auth']);
 Route::resource('questions', QuestionController::class);
 Route::resource('options', OptionController::class);

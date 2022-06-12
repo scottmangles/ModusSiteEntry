@@ -1,6 +1,6 @@
 <x-app-layout>
     
-    <div class="px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-0">
         <div class="sm:flex sm:items-center">
           <div class="sm:flex-auto">
             <h1 class="text-xl font-semibold text-gray-900">{{ $site->name }} Site </h1>
@@ -162,8 +162,39 @@
 
       <br>
 
-      <h2 class="mt-5 text-xl font-semibold text-gray-900">Contractors Banned From Site Site</h2>
-      <p class="mt-2 text-sm text-gray-700">currently XXXX personel banned from {{ $site->name }} site</p>
+      
+      
+
+      <div class="px-4 sm:px-6 lg:px-0">
+        <div class="sm:flex sm:items-center">
+          <div class="sm:flex-auto">
+            <h2 class="mt-5 text-xl font-semibold text-gray-900">Contractors Banned From Site Site</h2>
+            <br>
+            <p class="mt-2 text-sm text-gray-700">currently XXXX personel banned from {{ $site->name }} site</p>
+          </div>
+          <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+ 
+
+            <div x-data="{ open: false }">
+              <x-button-link-small @click="open = ! open">Ban Personel From Site</x-button-link-small>
+           
+              <div x-show="open">
+                <div class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24" id="headlessui-dialog-289" role="dialog" aria-modal="true">
+                  <div class="fixed inset-0 transition-opacity bg-gray-800 opacity-100 bg-opacity-60"></div>
+                      <div class="relative w-full max-w-lg px-4 transition-all transform scale-100 opacity-100">
+                      <div @click.outside="open = false" class="overflow-hidden bg-white rounded-lg shadow-md" id="headlessui-dialog-panel-292">
+                          <div class="relative flex items-center pr-4">
+                              <input class="flex-auto py-4 pl-4 pr-12 text-base text-gray-600 placeholder-gray-500 bg-transparent appearance-none -mr-9 focus:outline-none sm:text-sm" placeholder="Search users..." aria-label="Search components" id="headlessui-combobox-input-293" role="combobox" type="text" aria-expanded="false" tabindex="0" style="caret-color: rgb(107, 114, 128);">
+                              <svg width="20" height="20" fill="none" class="flex-none text-gray-400 pointer-events-none"><circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle><path d="M17.25 17.25L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </div>
+          </div>
+          </div>
+        </div>
+    </div>
   
       <div class="mt-8 -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
           <table class="min-w-full divide-y divide-gray-300">

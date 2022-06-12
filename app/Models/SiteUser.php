@@ -13,6 +13,8 @@ class SiteUser extends Model
         'site_id',
         'user_id',
         'status',
+        'signed_in_by',
+        'signed_out_by',
         'time_on_site', 
         'time_off_site'
     ];

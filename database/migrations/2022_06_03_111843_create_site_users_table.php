@@ -18,6 +18,8 @@ class CreateSiteUsersTable extends Migration
             $table->bigInteger('site_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->string('status')->default('on site');
+            $table->bigInteger('signed_in_by')->unsigned();
+            $table->bigInteger('signed_out_by')->unsigned();
             $table->timestamp('time_on_site')->nullable();
             $table->timestamp('time_off_site')->nullable();
             $table->timestamps();
@@ -27,6 +29,14 @@ class CreateSiteUsersTable extends Migration
                 ->onDelete('cascade');
             
             $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('signed_in_by')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+                
+            $table->foreign('signed_out_by')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
         });

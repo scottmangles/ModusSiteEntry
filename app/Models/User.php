@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'mobile',
         'sub_contractor',
         'vehicle_make',
@@ -76,7 +77,7 @@ class User extends Authenticatable
     }
 
     public function siteManager(){
-        return $this->belongsTo(Site::class, 'site_manager', 'id');
+        return $this->belongsTo(Site::class, 'id', 'site_manager');
     }
 
 }
