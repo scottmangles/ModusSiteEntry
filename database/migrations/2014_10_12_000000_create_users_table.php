@@ -29,7 +29,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('induction_expires')->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

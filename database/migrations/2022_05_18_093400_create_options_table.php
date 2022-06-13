@@ -18,7 +18,6 @@ class CreateOptionsTable extends Migration
             $table->string('option_name');
             $table->integer('points')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
