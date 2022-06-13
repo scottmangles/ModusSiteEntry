@@ -67,7 +67,7 @@ class SiteController extends Controller
         return redirect()
             ->route('sites.index')
             ->with(['success' => $site->name . " site added to database."
-        ]);
+        ]); 
     }
 
     /**

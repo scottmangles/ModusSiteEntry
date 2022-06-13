@@ -14,6 +14,8 @@ class Site extends Model
         'site_manager',
         'open_at',
         'closed_at',
+        'qr_src',
+        'status',
         'created_at',
         'updated_at',
     ];

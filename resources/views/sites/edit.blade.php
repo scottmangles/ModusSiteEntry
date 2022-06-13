@@ -41,6 +41,19 @@
                 <x-label> Site closes at </x-label>
                 <x-input type="time" name="closed_at" min="12:01" max="00:00" value="{{ old('closed_at') ?? $site->closed_at }}" required></x-input>
             </div>
+
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <x-label> Site Status </x-label>
+              <div class="mt-1 sm:mt-0 sm:col-span-2">
+                <select name="status" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-[#173a68] focus:border-[#173a68] sm:max-w-xs sm:text-sm">
+                  @isset($site->status)
+                  <option value="{{ old('status') ?? $site->status }}" selected>{{ $site->status }}</option>
+                  @endisset
+                  <option value="active">Active</option>
+                  <option value="complete">Complete</option>
+                </select>
+              </div>
+          </div>
             
         <div class="pt-5">
           <div class="flex justify-end">

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->nullable()->default(null);
             $table->string('mobile');
-            $table->string('sub_contractor');
+            $table->bigInteger('sub_contractor')->unsigned();
             $table->string('vehicle_make')->nullable();
             $table->string('vehicle_reg')->nullable();
             $table->string('cscs_number')->nullable();

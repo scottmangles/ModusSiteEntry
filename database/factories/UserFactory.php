@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Contractor;
 
 class UserFactory extends Factory
 {
@@ -18,8 +19,9 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'role' => $this->faker->randomElement(['manager', 'site_manager', 'admin', NULL]),
             'mobile' => $this->faker->regexify('07[7-9]{1}[0-9]{8}'),
-            'sub_contractor' => $this->faker->randomElement(['V & A Electrical', 'Marios', 'Block Bro\'s']),
+            'sub_contractor' => Contractor::all()->random()->id,
             'vehicle_make' => $this->faker->randomElement(['Ford', 'Mitsubishi', 'Mercedes']),
             'vehicle_reg' => $this->faker->regexify('[A-Z]{2}[5-7]{2} [0-9]{1}[A-Z]{2}'),
             'cscs_number' => $this->faker->regexify('[1-9]{8}'),

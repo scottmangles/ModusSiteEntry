@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SiteRequest extends FormRequest
+class UpdateContractorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class SiteRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +24,7 @@ class SiteRequest extends FormRequest
     public function rules()
     {
         return [
-        'name' => 'required',
-        'site_manager' => 'required',
-        'open_at' => 'required',
-        'closed_at' => 'required',
-        'status' => 'required',
+            //
         ];
     }
 }

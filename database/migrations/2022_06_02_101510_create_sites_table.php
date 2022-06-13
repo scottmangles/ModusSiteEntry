@@ -19,6 +19,8 @@ class CreateSitesTable extends Migration
             $table->bigInteger('site_manager')->unsigned();
             $table->time('open_at');
             $table->time('closed_at');
+            $table->string('qr_src')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
 
             $table->foreign('site_manager')->references('id')->on('users')

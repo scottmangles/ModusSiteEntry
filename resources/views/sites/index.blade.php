@@ -20,6 +20,8 @@
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Site manager</th>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Site open</th>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Site closed</th>
+            <th scope="col" class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:table-cell">Download Qr Codes</th>
+            <th scope="col" class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:table-cell">Download Qr Codes</th>
             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
               <span class="sr-only">Edit</span>
             </th>
@@ -35,6 +37,8 @@
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ $site->siteManager->name }}</td>
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ Carbon\Carbon::parse($site->open_at)->format('H:i') }}</td>
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ Carbon\Carbon::parse($site->closed_at)->format('H:i') }}</td>
+            <td class="hidden w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6 lg:table-cell">Sign in Qr</td>
+            <td class="hidden w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6 lg:table-cell">Sign out Qr</td>
             <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
               <a href="{{ route('sites.edit', ['site' => $site->id]) }}" class="text-[#173a68] hover:text-blue-800">Edit</a>
             </td>
