@@ -1280,6 +1280,10 @@ select {
   padding-left: 2rem;
   padding-right: 2rem;
 }
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 .pl-4 {
   padding-left: 1rem;
 }
@@ -1321,6 +1325,12 @@ select {
 }
 .pt-6 {
   padding-top: 1.5rem;
+}
+.pl-0 {
+  padding-left: 0px;
+}
+.pr-0 {
+  padding-right: 0px;
 }
 .text-left {
   text-align: left;

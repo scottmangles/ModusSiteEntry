@@ -9,6 +9,7 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InductionController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::resource('questions', QuestionController::class);
 Route::resource('options', OptionController::class);
 Route::resource('results', ResultController::class)->only(['index']);
 Route::resource('quizes', QuizController::class)->only(['create', 'store'])->middleware(['auth']);
+Route::resource('users', UserController::class)->except(['create', 'show']);
 
 //Find user id and pass perameter to sign in construction site function
 Route::get('/userfind/site/{site_id}', [App\Http\Controllers\SiteUserController::class, 'findUserId'])->middleware('auth')->name('findUserId');
