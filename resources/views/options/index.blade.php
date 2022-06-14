@@ -55,6 +55,9 @@
         </tbody>
       </table>
     </div>
+    <div>
+      {{ $options->links() }}
+  </div>
   </div>
 
 </x-app-layout>

@@ -38,22 +38,26 @@
                   <!-- Sub Contractor -->
                   <div class="mt-2">
                     <x-label for="sub_contractor" :value="__('Sub Contractor')" />
-    
-                    <x-contractor-select-box id="sub_contractor" class="block w-full mt-1" name="sub_contractor" :value="old('sub_contractor')" required autofocus></x-contractor-select-box>
+                      <select name="sub_contractor" class="w-full border-gray-300 rounded-md shadow-sm focus: focus:ring-[#173a68] focus:ring-opacity-50" required autofocus>
+                        <option value="">Please select ....</option>
+                        @foreach ($contractors as $contractor)
+                          <option value="{{ $contractor->id }}">{{ $contractor->name }}</option>
+                        @endforeach
+                      </select>
                   </div>
 
                   <!-- Vehicle Make -->
                  <div class="mt-2">
                     <x-label for="vehicle_make" :value="__('Vehicle Make (optional)')" />
     
-                    <x-input id="vehicle_make" class="block w-full mt-1" type="text" name="vehicle_make" :value="old('vehicle_make')" required autofocus />
+                    <x-input id="vehicle_make" class="block w-full mt-1" type="text" name="vehicle_make" :value="old('vehicle_make')" autofocus />
                   </div>
 
                   <!-- Vehicle Reg -->
                  <div class="mt-2">
                     <x-label for="vehicle_reg" :value="__('Vehicle Reg (optional)')" />
     
-                    <x-input id="vehicle_reg" class="block w-full mt-1" type="text" name="vehicle_reg" :value="old('vehicle_reg')" required autofocus />
+                    <x-input id="vehicle_reg" class="block w-full mt-1" type="text" name="vehicle_reg" :value="old('vehicle_reg')" autofocus />
                   </div>
 
                   <!-- Cscs number -->

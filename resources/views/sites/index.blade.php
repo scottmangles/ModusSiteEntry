@@ -55,6 +55,9 @@
         </tbody>
       </table>
     </div>
+    <div>
+      {{ $sites->links() }}
+  </div>
   </div>
 
 </x-app-layout>

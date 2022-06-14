@@ -78,7 +78,7 @@
              @endif
 
             <td class="px-3 py-4 text-sm text-gray-500">{{ $user->name }}</td>
-            <td class="px-3 py-4 text-sm text-gray-500">{{ $user->sub_contractor }}</td>
+            <td class="px-3 py-4 text-sm text-gray-500">{{ $user->contractor->name }}</td>
             <td class="px-3 py-4 text-sm text-gray-500">{{ Carbon\Carbon::parse($onSite->time_on_site)->format('H:i') }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->mobile }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->email }}</td>
@@ -95,7 +95,9 @@
           </tbody>
         </table>
       </div>
-
+      <div>
+        {{ $onSites->links() }}
+    </div>
     <br>
 
     <h2 class="mt-5 text-xl font-semibold text-gray-900">Left Site</h2>
@@ -145,7 +147,7 @@
              @endif 
 
              <td class="px-3 py-4 text-sm text-gray-500">{{ $user->name }}</td>
-             <td class="px-3 py-4 text-sm text-gray-500">{{ $user->sub_contractor }}</td>
+             <td class="px-3 py-4 text-sm text-gray-500">{{ $user->contractor->name }}</td>
              <td class="px-3 py-4 text-sm text-gray-500">{{ Carbon\Carbon::parse($offSite->time_on_site)->format('H:i') }}</td>
              <td class="px-3 py-4 text-sm text-gray-500">{{ Carbon\Carbon::parse($offSite->time_off_site)->format('H:i') }}</td>
              <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->mobile }}</td>
@@ -159,7 +161,9 @@
           </tbody>
         </table>
       </div>
-
+      <div>
+        {{ $offSites->links() }}
+    </div>
       <br>
 
       
@@ -224,7 +228,7 @@
                   </td>
                   
                <td class="px-3 py-4 text-sm text-gray-500">{{ $bannedSite->user->name }}</td>
-               <td class="px-3 py-4 text-sm text-gray-500">{{ $bannedSite->user->sub_contractor }}</td>
+               <td class="px-3 py-4 text-sm text-gray-500">{{ $bannedSite->user->contractor->name }}</td>
                <td class="px-3 py-4 text-sm text-gray-500">{{ $bannedSite->created_at }}</td>
                <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $bannedSite->userBanned->name }}</td>
                <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><x-button-link-small>View details</x-button-link-small></td>
@@ -235,7 +239,9 @@
             </tbody>
           </table>
         </div>
-
+        <div>
+          {{ $bannedSites->links() }}
+      </div>
     </div>
   </div>
 </x-app-layout>

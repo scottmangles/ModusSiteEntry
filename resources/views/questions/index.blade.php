@@ -49,5 +49,8 @@
         </tbody>
       </table>
     </div>
+    <div>
+      {{ $questions->links() }}
+  </div>
   </div>
 </x-app-layout>

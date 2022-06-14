@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $user = User::find(auth()->id());
         $siteInductions = SiteInduction::where('user_id', auth()->id())->get();
         $sitesInducted = SiteInduction::where('user_id', auth()->id())->pluck('site_id');
-        $sites = Site::whereNotIn('id', $sitesInducted)->get();
+        $sites = Site::whereNotIn('id', $sitesInducted)->paginate(5);
 
     return view('dashboard')->with([
         'user' => $user,

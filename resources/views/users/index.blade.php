@@ -33,7 +33,7 @@
             </td>
             <td class="w-full py-4 pl-4 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ $user->name }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->role }}</td>
-            <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ $user->sub_contractor }}</td>
+            <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ $user->contractor->name }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->email }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->mobile }}</td>
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-900 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">
@@ -60,6 +60,9 @@
         </tbody>
       </table>
     </div>
+    <div>
+      {{ $users->links() }}
+  </div>
   </div>
 
 </x-app-layout>

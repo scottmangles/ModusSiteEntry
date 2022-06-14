@@ -18,7 +18,7 @@ class OptionController extends Controller
      */
     public function index()
     {
-        $options = Option::all();
+        $options = Option::paginate(15);
 
         return view('options.index')->with([
             'options' => $options,

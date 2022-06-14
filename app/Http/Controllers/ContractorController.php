@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreContractorRequest;
-use App\Http\Requests\UpdateContractorRequest;
+use App\Http\Requests\ContractorRequest;
 use App\Models\Contractor;
 
 class ContractorController extends Controller
@@ -15,7 +14,11 @@ class ContractorController extends Controller
      */
     public function index()
     {
-        //
+        $contractors = Contractor::paginate(10);
+
+        return view('contractors.index')->with([
+            'contractors' => $contractors,
+        ]);
     }
 
     /**
@@ -25,18 +28,24 @@ class ContractorController extends Controller
      */
     public function create()
     {
-        //
+        return view('contractors.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreContractorRequest  $request
+     * @param  \App\Http\Requests\ContractorRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreContractorRequest $request)
+    public function store(ContractorRequest $request)
     {
-        //
+        //dd($request->validated());
+
+        $contractor = Contractor::create($request->validated());
+
+        return redirect()
+            ->route('contractors.index')
+            ->with(['success' => "contractor " . $contractor->name . " added to database"]);
     }
 
     /**
@@ -58,19 +67,27 @@ class ContractorController extends Controller
      */
     public function edit(Contractor $contractor)
     {
-        //
+        return view('contractors.edit')->with([
+            'contractor' => $contractor,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateContractorRequest  $request
+     * @param  \App\Http\Requests\ContractorRequest  $request
      * @param  \App\Models\Contractor  $contractor
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateContractorRequest $request, Contractor $contractor)
+    public function update(ContractorRequest $request, Contractor $contractor)
     {
-        //
+        //dd($request->validated());
+
+        $contractor->update($request->validated());
+
+        return redirect()
+            ->route('contractors.index')
+            ->with(['success' => "contractor " . $contractor->name . " has been updated"]);
     }
 
     /**
@@ -81,6 +98,8 @@ class ContractorController extends Controller
      */
     public function destroy(Contractor $contractor)
     {
-        //
+        return redirect()
+            ->route('contractors.index')
+            ->withWarning("you do not have permission to delete " . $contractor->name . " please contact database administrator");
     }
 }

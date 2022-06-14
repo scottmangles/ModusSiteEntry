@@ -27,7 +27,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::all();
+        $sites = Site::paginate(10);
 
         
         return view('sites.index')->with([
@@ -84,18 +84,18 @@ class SiteController extends Controller
             ->where([['status', '=', 'on site'],
                 ['site_id', '=', $site->id]
             ])
-            ->get();
+            ->paginate(10);
 
         $offSites = SiteUser::select()
             ->WhereDate('time_off_site', Carbon::today())
             ->where([['status', '=', 'off site'],
                 ['site_id', '=', $site->id],])
-            ->get();
+            ->paginate(10);
 
         $bannedSites = SiteInduction::select()
             ->where([['status', '=', 'access denied'],
                 ['site_id', '=', $site->id],])
-            ->get();
+            ->paginate(10);
           //dd($bannedSites);
        // dd($onSites);
 

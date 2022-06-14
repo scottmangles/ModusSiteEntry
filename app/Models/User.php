@@ -79,4 +79,9 @@ class User extends Authenticatable
         return $this->belongsTo(Site::class, 'id', 'site_manager');
     }
 
+    public function contractor()
+    {
+        return $this->belongsTo(Contractor::class, 'sub_contractor', 'id');
+    }
+
 }
