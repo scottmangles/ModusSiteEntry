@@ -27,9 +27,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 
-            'string', 'email', 
-            'max:255', 
-            Rule::unique('users')->ignore($this->user()->id)
+                'string', 'email', 
+                'max:255', 
+                Rule::unique('users')->ignore($this->user->id)
             ],
             'mobile' => ['required', 'digits:11', 'regex:/07[0-9]{9}/'],
             'role' => ['nullable'],

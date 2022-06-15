@@ -55,4 +55,9 @@ Route::get('/id/{site_pivot_id}/user/{user_id}/site/{site_id}/signoutsitemanager
 
 Route::post('/site/mansignin', [App\Http\Controllers\SiteUserController::class, 'manualSiteEntry'])->middleware('auth')->name('manualSignIn');
 
+//allow site access
+Route::get('/{user_id}/allow/{site_id}', [App\Http\Controllers\SiteAccessController::class, 'allowAccess'])->name('allowAccess');
+//allow supervised access
+Route::get('/{user_id}/supervised/{site_id}', [App\Http\Controllers\SiteAccessController::class, 'allowSupervised'])->name('allowSupervised');
+
 require __DIR__.'/auth.php';

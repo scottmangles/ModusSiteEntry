@@ -53,12 +53,14 @@
                 <x-label>Company </x-label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                   <select name="sub_contractor" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-[#173a68] focus:border-[#173a68] sm:max-w-xs sm:text-sm">
-                    @isset($user->sub_contractor)
-                        <option value="{{ old('user_sub_contractor') ?? $user->sub_contractor }}" selected>{{ $user->sub_contractor }}</option>  
-                    @endisset    
-                        <option>None</option>
-                        <option value="block bro's">Block bro's</option>
-                        <option value="marios">Mario's</option>
+                    @if($user->sub_contractor != NULL)
+                        <option value="{{ old('sub_contractor') ?? $user->sub_contractor }}" selected>{{ $user->contractor->name }}</option>  
+                    @else
+                    <option value="">Please select ....</option>
+                    @endif
+                    @foreach ($contractors as $contractor)
+                    <option value="{{ $contractor->id }}">{{ $contractor->name }}</option>
+                    @endforeach    
                   </select>
                 </div>
             </div>
