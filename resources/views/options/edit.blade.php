@@ -32,7 +32,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <x-label> Option Text </x-label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                      <x-textarea-forms type="text" name="option_name">{{ old('option_name') ?? $option>option_name }}</x-textarea-forms>
+                      <x-textarea-forms type="text" name="option_name">{{ old('option_name') ?? $option->option_name }}</x-textarea-forms>
                     </div>
             </div>
 
