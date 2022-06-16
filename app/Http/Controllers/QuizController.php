@@ -47,14 +47,7 @@ class QuizController extends Controller
     {
         $options = Option::find(array_values($request->input('questions')));
 
-       //dd($options->sum('points'));
-
-        $result = Result::create([
-            'total_points' => $options->sum('points'),
-            'user_id' => auth()->id(),
-        ]);
-
-        if ($result->total_points == 5) {
+        if ($options->sum('points') == 5) {
             
             $user = User::find(auth()->id());
 
