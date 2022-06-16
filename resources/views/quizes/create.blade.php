@@ -31,7 +31,7 @@
               @endforeach
         <div class="pt-5">
           <div class="flex justify-end">
-            <x-button-link-small href="{{ route('dashboard') }}">Exit qiuz</x-button-link-small>
+            <x-button-link-small href="{{ route('dashboard') }}">Exit test</x-button-link-small>
             <x-button-small type="submit" class=ml-3>Submit</x-button-small>
           </div>
         </div>
