@@ -62,6 +62,27 @@
               </svg>
               {{ Auth::user()->siteManager->name }} site
             </a>
+
+          <a href="{{ route('site_inductions.index') }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+            <svg class="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Unassigned users
+          </a>
+
+          <a href="{{ route('showUsersAccess', [Auth::user()->siteManager->id]) }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+            <svg class="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Users with access
+          </a>
+
+          <a href="{{ route('showUsersBanned', [Auth::user()->siteManager->id]) }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+            <svg class="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Banned users
+          </a>
           @endif
 
           @if(Auth::user()->role == 'admin')
@@ -135,7 +156,7 @@
           <div class="flex items-center">
             <div class="ml-3">
               <p class="text-base font-medium text-white">{{ Auth::user()->name }}</p>
-              <p class="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
+              <a href="{{ route('users.edit', [Auth::user()->id]) }}"><p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p></a>
             </div>
           </div>
         </a>
@@ -178,11 +199,24 @@
           </a>
 
           <a href="{{ route('site_inductions.index') }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-            <!-- Heroicon name: office building -->
             <svg class="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            {{ Auth::user()->siteManager->name }} traffic light system
+            Unassigned users
+          </a>
+
+          <a href="{{ route('showUsersAccess', [Auth::user()->siteManager->id]) }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+            <svg class="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Users with access
+          </a>
+
+          <a href="{{ route('showUsersBanned', [Auth::user()->siteManager->id]) }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+            <svg class="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Banned users
           </a>
         @endif
 
@@ -260,7 +294,7 @@
             
             <div class="ml-3">
               <p class="text-sm font-medium text-white">{{ Auth::user()->name }}</p>
-              <p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p>
+              <a href="{{ route('users.edit', [Auth::user()->id]) }}"><p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p></a>
             </div>
           </div>
       </div>

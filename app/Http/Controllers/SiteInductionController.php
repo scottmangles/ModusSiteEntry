@@ -18,31 +18,23 @@ class SiteInductionController extends Controller
      */
     public function index()
     {
-       // $siteInductions = SiteInduction::all();
-
         $site = Site::find(auth()->user()->siteManager->id);
 
         $usersInductedIds = SiteInduction::where('site_id', $site->id)
             ->pluck('user_id');
-        
-        $usersInducted = SiteInduction::where('site_id', $site->id)
+        /*
+        $usersInducted = SiteInduction::where([['site_id', $site->id], ['status', 'access granted']])
+        ->orWhere([['site_id', $site->id], ['status', 'access warning']])
         ->orderBy('user_id')    
         ->paginate(10);
-        
+         */
         $users = User::whereNotIn('id', $usersInductedIds)
             ->orderBy('name')
-            ->paginate(10);
+            ->paginate(8);
 
-       // $sites = Site::whereNotIn('id', $sitesInducted)->paginate(5);
-
-       // dd($usersInducted, $users);
-
-        return view('site_access.index')->with([
+        return view('site_access.unassigned')->with([
             'users' => $users,
             'site' => $site,
-           // 'siteInductions' => $siteInductions,
-           'usersInducted' => $usersInducted,
-           'users' =>$users,
         ]);
     }
 
@@ -64,10 +56,7 @@ class SiteInductionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        //$user = User::find($user_id);
-       // $site = Site::find($site_id);
-       // $siteManager = auth()->user()->id;
+        //
     }
 
     /**

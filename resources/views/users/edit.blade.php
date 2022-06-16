@@ -91,7 +91,7 @@
            
         <div class="pt-5">
           <div class="flex justify-end">
-            <x-button-link-small href="{{ route('users.index') }}">Cancel</x-button-link-small>
+            <x-button-link-small href="{{ URL::previous() }}">Cancel</x-button-link-small>
             <x-button-small type="submit" class=ml-3>Save</x-button-small>
           </div>
         </div>
