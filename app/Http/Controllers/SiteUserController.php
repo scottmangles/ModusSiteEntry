@@ -108,11 +108,10 @@ class SiteUserController extends Controller
                     ])
                 ->first();
 
-    
                 
            // dd($checkEntryStatus);
 
-            if ($checkEntryStatus->status == 'access denied' or $checkEntryStatus == null) {
+            if ($checkEntryStatus == NULL or $checkEntryStatus->status == 'access denied') {
                 // return warning not granted access by site manager
                 return redirect()
                 ->route('dashboard')
