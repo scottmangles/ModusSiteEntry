@@ -62,6 +62,7 @@ class SiteUserController extends Controller
 
     public function attachSiteUser($user_id, $site_id) {
        
+        //get user and site details
         $user = User::find($user_id);
         $site = Site::find($site_id);
         
