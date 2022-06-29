@@ -11,11 +11,7 @@ use App\Models\SiteInduction;
 
 class SiteUserService
 {
-    public function getUserSiteDetails()
-    {
-        //
-    }
-
+    
     public function checkSiteSignInStatus($user, $site) {
             
         //check user is not currently signed into any other site
@@ -29,12 +25,11 @@ class SiteUserService
         foreach($siteUsers as $siteUser){
             if ($siteUser->status == 'on site') {
                 $onSite = true;
-                return redirect()
-                ->route('dashboard')
-                ->with([
-                    'warning' => "You cannot sign into multiple sites 
-                    please sign out of current site first",
-                    'onSite' => $onSite
+                return  back()
+                    ->with([
+                        'warning' => "You cannot sign into multiple sites 
+                        please sign out of current site first",
+                        'onSite' => $onSite
                 ]);
             }
         }
@@ -47,12 +42,11 @@ class SiteUserService
         //check company induction is in date
         if ($user->induction_expires == null or $user->induction_expires <= Carbon::now()) {
                 
-            return redirect()
-            ->route('dashboard')
-            ->with([
-                'warning' => "Your induction status is not in date, 
-                please complete your site induction before signing into site",
-            ]);
+            return back()
+                ->with([
+                    'warning' => "Your induction status is not in date, 
+                    please complete your site induction before signing into site",
+                ]);
         }
         else {
             return $inductionStatus = true;
@@ -75,15 +69,15 @@ class SiteUserService
 
     if ($checkEntryStatus == NULL or $checkEntryStatus->status == 'access denied') {
         // return warning not granted access by site manager
-        return redirect()
-        ->route('dashboard')
-        ->with([
-        'warning' => "You do not have the correct permissions to enter " . $site->name . " site, please contact the site manager to gain access to site",
-        ]);
+        return back()
+            ->with([
+                'warning' => "You do not have the correct permissions to enter " . $site->name . " site, please contact the site manager to gain access to site",
+            ]);
     }
     else {
         return $entryStatus = true;
     }
+    
     }
 
     public function signIntoSite($user, $site) {
@@ -98,8 +92,7 @@ class SiteUserService
         //dd($site_id, $user_id);
         $onSite = true;
 
-        return redirect()
-            ->route('dashboard')
+        return back()
             ->with([
                 'success' => "You are signed into " . $site->name . " site",
                 'onSite' => $onSite
