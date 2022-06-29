@@ -11,25 +11,21 @@ use App\Models\SiteInduction;
 
 class SiteUserService
 {
-    //find user id from qr code
-    public function findUserId($site_id) {
-
-        $user_id = Auth::user()->id;
-        $site_id = intval( $site_id );
-
-        //dd($user_id, $site_id);
-        return back()->with([$user_id, $site_id]);
-    }
-
     public function getUserSiteDetails()
     {
-
+        //
     }
 
-    public function checkSiteSignInStatus($user, $site, $siteUsers, $sites) {
-       
+    public function checkSiteSignInStatus($user, $site) {
             
         //check user is not currently signed into any other site
+        $siteUsers = SiteUser::select()
+        ->where('user_id', auth()->id())
+        ->where('status', 'on site')
+        ->get();
+         
+        $sites = Site::all();
+
         foreach($siteUsers as $siteUser){
             if ($siteUser->status == 'on site') {
                 $onSite = true;
@@ -38,17 +34,15 @@ class SiteUserService
                 ->with([
                     'warning' => "You cannot sign into multiple sites 
                     please sign out of current site first",
-                    'sites' => $sites,
-                    'user' => $user,
                     'onSite' => $onSite
                 ]);
             }
         }
-
-        return $this->siteUsers;
+       
+        return true;
     }
 
-    public function checkInductionStatus($user, $sites)
+    public function checkInductionStatus($user)
     {
         //check company induction is in date
         if ($user->induction_expires == null or $user->induction_expires <= Carbon::now()) {
@@ -58,15 +52,19 @@ class SiteUserService
             ->with([
                 'warning' => "Your induction status is not in date, 
                 please complete your site induction before signing into site",
-                'sites' => $sites,
-                'user' => $user,
             ]);
         }
+        else {
+            return $inductionStatus = true;
+        }
+        
     }
+ 
 
-    public function checkSiteEntryStatus($site, $user, $sites)
+    public function checkSiteAccessStatus($user, $site) {
+
+        $sites = Site::all();
     
-    {
         //check user entry status for individual site, if access granted, access warning or access denied by site manager
         $checkEntryStatus = SiteInduction::select()
         ->where([
@@ -75,21 +73,38 @@ class SiteUserService
             ])
         ->first();
 
-
-    // check if user has never been to site or if user has been banned from site
     if ($checkEntryStatus == NULL or $checkEntryStatus->status == 'access denied') {
         // return warning not granted access by site manager
         return redirect()
         ->route('dashboard')
         ->with([
         'warning' => "You do not have the correct permissions to enter " . $site->name . " site, please contact the site manager to gain access to site",
-        'sites' => $sites,
-        'user' => $user,
         ]);
     }
+    else {
+        return $entryStatus = true;
+    }
+    }
 
-    return $this->checkEntryStatus;
+    public function signIntoSite($user, $site) {
 
+        $sites = Site::all();
+
+        //sign user into site with current time and date
+        $user->sites()->attach($site->id, [
+            'signed_in_by' => Auth::user()->id,
+            'status' => 'on site', 
+            'time_on_site' => Carbon::now()]);
+        //dd($site_id, $user_id);
+        $onSite = true;
+
+        return redirect()
+            ->route('dashboard')
+            ->with([
+                'success' => "You are signed into " . $site->name . " site",
+                'onSite' => $onSite
+                ]);
+       
     }
 
 }
