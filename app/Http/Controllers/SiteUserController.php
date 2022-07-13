@@ -42,7 +42,7 @@ class SiteUserController extends Controller
        
        $accessStatus = $this->siteUserService->checkSiteAccessStatus($user, $site);
        $siteInductionStatus = $this->siteUserService->checkInductionStatus($user);
-       $entryStatus = $this->siteUserService->checkSiteSignInStatus($user, $site);
+       $entryStatus = $this->siteUserService->checkSiteSignInStatus($user);
 
 
         if ($siteInductionStatus === true && $entryStatus === true  && $accessStatus === true) {

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Models\Contractor;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -20,6 +21,9 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
+        session(['url.intended' => url()->previous()]);
+
+        $contractor = Contractor::factory()->create();
         $user = User::factory()->create();
 
         $response = $this->post('/login', [
@@ -28,11 +32,14 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $response->assertRedirect = session()->get('url.intended');
+
+        //$response->assertRedirect(RouteServiceProvider::HOME);
     }
 
     public function test_users_can_not_authenticate_with_invalid_password()
-    {
+    {   
+        $contractor = Contractor::factory()->create();
         $user = User::factory()->create();
 
         $this->post('/login', [

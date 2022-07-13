@@ -10,9 +10,9 @@ use Illuminate\Support\Carbon;
 use App\Models\SiteInduction;
 
 class SiteUserService
-{
+{ 
     
-    public function checkSiteSignInStatus($user, $site) {
+    public function checkSiteSignInStatus($user) {
             
         //check user is not currently signed into any other site
         $siteUsers = SiteUser::select()

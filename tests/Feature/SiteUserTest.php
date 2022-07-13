@@ -1,25 +1,21 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature;
 
-use App\Providers\RouteServiceProvider;
+use App\Models\Site;
+use App\Models\User;
+use App\Services\SiteUserService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class RegistrationTest extends TestCase
+class SiteUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_registration_screen_can_be_rendered()
+    public function test_check_sign_in_status()
     {
-        $response = $this->get('/register');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_new_users_can_register()
-    {
-        $response = $this->post('/register', [
+        $user = User::make([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'password',
@@ -30,8 +26,10 @@ class RegistrationTest extends TestCase
             'vehicle_reg' => 'FN56 6FG',
             'cscs_number' => '80798767',
         ]);
-
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+    
+        $checkStatus = $this->siteUserService->checkSignInStatus($$user);
+       dd($checkStatus);
+        $this->assertTrue($checkStatus === True);
+        
     }
 }
