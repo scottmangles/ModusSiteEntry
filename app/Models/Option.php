@@ -10,6 +10,7 @@ class Option extends Model
     use HasFactory;
 
     public $table = 'options';
+
     protected $fillable = [
         'points',
         'created_at',
