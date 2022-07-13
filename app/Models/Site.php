@@ -22,7 +22,7 @@ class Site extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User', 'site_users')
+        return $this->belongsToMany(\App\Models\User::class, 'site_users')
             ->withPivot('status', 'id', 'time_on_site', 'time_off_site')
             ->orderBy('id');
     }
@@ -34,7 +34,7 @@ class Site extends Model
 
     public function siteUsers()
     {
-        return $this->hasMany('App\Models\SiteUser', 'id', 'site_id');
+        return $this->hasMany(\App\Models\SiteUser::class, 'id', 'site_id');
     }
 
     public function siteManager()

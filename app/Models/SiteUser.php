@@ -21,11 +21,11 @@ class SiteUser extends Model
 
     public function sites()
     {
-        return $this->belongsToMany('App\Models\Site');
+        return $this->belongsToMany(\App\Models\Site::class);
     }
 
     public function users()
     {
-        return $this->hasMany('App\Models\User', 'id', 'user_id');
+        return $this->hasMany(\App\Models\User::class, 'id', 'user_id');
     }
 }
