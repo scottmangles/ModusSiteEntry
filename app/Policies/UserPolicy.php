@@ -6,16 +6,17 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Http\Response;
 
-
 class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function before($user, $ability) {
+    public function before($user, $ability)
+    {
         if ($user->role == 'admin') {
             return true;
         }
     }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -60,7 +61,6 @@ class UserPolicy
     public function update(User $user, User $model)
     {
         return $user->id === $model->id;
-       
     }
 
     /**

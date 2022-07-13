@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Quiz;
-use App\Models\Question;
 use App\Models\Option;
+use App\Models\Question;
+use App\Models\Quiz;
 use App\Models\Result;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
@@ -30,7 +30,7 @@ class QuizController extends Controller
     {
         $questions = Question::inRandomOrder()->take(5)->get();
 
-       // dd($questions);
+        // dd($questions);
 
         return view('quizes.create')->with([
             'questions' => $questions,
@@ -48,7 +48,6 @@ class QuizController extends Controller
         $options = Option::find(array_values($request->input('questions')));
 
         if ($options->sum('points') == 5) {
-            
             $user = User::find(auth()->id());
 
             $user->update([
@@ -59,19 +58,17 @@ class QuizController extends Controller
             return redirect()
                 ->route('dashboard')
                 ->with([
-                    'success' => "Congratulations you've passed your site induction.  Expiry is shown in your dashboard."
+                    'success' => "Congratulations you've passed your site induction.  Expiry is shown in your dashboard.",
                 ]);
-
         } else {
             return redirect()
                 ->route('dashboard')
                 ->with([
-                    'warning' => "You've failed your site induction questionnaire, you scored " . $options->sum('points') . " points, 5 correct answers are required to pass.  
-                    Please complete the site induction before attempting to sign into site"
-                    
+                    'warning' => "You've failed your site induction questionnaire, you scored ".$options->sum('points').' points, 5 correct answers are required to pass.  
+                    Please complete the site induction before attempting to sign into site',
+
                 ]);
-            
-          }
+        }
     }
 
     /**

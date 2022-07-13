@@ -18,7 +18,7 @@ class CreateSiteInductionsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('site_id')->unsigned();
             $table->string('status');
-            $table->bigInteger('completed_by')->unsigned();;
+            $table->bigInteger('completed_by')->unsigned();
             $table->text('notes');
             $table->timestamps();
 
@@ -28,7 +28,6 @@ class CreateSiteInductionsTable extends Migration
                 ->onDelete('cascade');
             $table->foreign('completed_by')->references('id')->on('users')
                 ->onDelete('cascade');
-
         });
     }
 

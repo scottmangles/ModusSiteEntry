@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Contractor;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-
 
 class UserController extends Controller
 {
@@ -15,6 +14,7 @@ class UserController extends Controller
     {
         $this->middleware('admin')->only(['index', 'destroy']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -88,7 +88,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-
         abort_unless(Gate::allows('update', $user), 403, 'You are not authorised to edit this user profile');
         //dd($request->user, $request->validated());
 
@@ -96,8 +95,8 @@ class UserController extends Controller
 
         return redirect()
             ->route('users.index')
-            ->with(['success' => $user->name . "'s profile has been updated."
-        ]);
+            ->with(['success' => $user->name."'s profile has been updated.",
+            ]);
     }
 
     /**
@@ -109,9 +108,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         abort_unless(Gate::allows('delete', $user), 403, 'You are not authorised to delete this user profile');
+
         return redirect()
             ->route('users.index')
-            ->with(['warning' => 'you do not have permission to delete ' . $user->name . ' please contact database admin'
-        ]);
+            ->with(['warning' => 'you do not have permission to delete '.$user->name.' please contact database admin',
+            ]);
     }
 }

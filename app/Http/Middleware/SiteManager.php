@@ -22,9 +22,9 @@ class SiteManager
         }
 
         if (Auth::user()->role == 'site_manager' && $request->site->siteManager->id != Auth::user()->id) {
-            abort(403, 'You do not have access to ' . $request->site->name . ' site');
+            abort(403, 'You do not have access to '.$request->site->name.' site');
         }
-        
+
         abort(403, 'Site Manager access only');
     }
 }

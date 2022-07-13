@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
 use App\Models\Contractor;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -38,7 +38,7 @@ class AuthenticationTest extends TestCase
     }
 
     public function test_users_can_not_authenticate_with_invalid_password()
-    {   
+    {
         $contractor = Contractor::factory()->create();
         $user = User::factory()->create();
 

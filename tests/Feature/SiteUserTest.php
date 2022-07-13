@@ -21,15 +21,14 @@ class SiteUserTest extends TestCase
             'password' => 'password',
             'password_confirmation' => 'password',
             'mobile' => '07545677898',
-            'sub_contractor' => 1, 
+            'sub_contractor' => 1,
             'vehicle_make' => 'vauxhall',
             'vehicle_reg' => 'FN56 6FG',
             'cscs_number' => '80798767',
         ]);
-    
+
         $checkStatus = $this->siteUserService->checkSignInStatus($$user);
-       dd($checkStatus);
-        $this->assertTrue($checkStatus === True);
-        
+        dd($checkStatus);
+        $this->assertTrue($checkStatus === true);
     }
 }

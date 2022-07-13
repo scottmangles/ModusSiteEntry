@@ -26,17 +26,17 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 
-                'string', 'email', 
-                'max:255', 
-                Rule::unique('users')->ignore($this->user->id)
+            'email' => ['required',
+                'string', 'email',
+                'max:255',
+                Rule::unique('users')->ignore($this->user->id),
             ],
             'mobile' => ['required', 'digits:11', 'regex:/07[0-9]{9}/'],
             'role' => ['nullable'],
             'sub_contractor' => ['required'],
             'vehicle_make' => ['nullable'],
             'vehicle_reg' => ['nullable'],
-            'cscs_number' => ['nullable', 'digits:8']
+            'cscs_number' => ['nullable', 'digits:8'],
         ];
     }
 }

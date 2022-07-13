@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\Builder;
 
 class SiteInduction extends Model
 {
@@ -19,7 +19,7 @@ class SiteInduction extends Model
         'created_at',
         'updated_at',
     ];
- 
+
     public function sites()
     {
         return $this->belongsTo(Site::class, 'site_id', 'id');
@@ -35,4 +35,3 @@ class SiteInduction extends Model
         return $this->belongsTo(User::class, 'completed_by', 'id');
     }
 }
- 

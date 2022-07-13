@@ -24,11 +24,11 @@ class SiteRequest extends FormRequest
     public function rules()
     {
         return [
-        'name' => 'required',
-        'site_manager' => 'required',
-        'open_at' => 'required',
-        'closed_at' => 'required',
-        'status' => 'required',
+            'name' => 'required',
+            'site_manager' => 'required',
+            'open_at' => 'required',
+            'closed_at' => 'required',
+            'status' => 'required',
         ];
     }
 }

@@ -9,7 +9,6 @@ class Contractor extends Model
 {
     use HasFactory;
 
-
     protected $dates = [
         'created_at',
         'updated_at',
@@ -26,5 +25,4 @@ class Contractor extends Model
     {
         return $this->hasMany(User::class, 'id', 'sub_contractor');
     }
-
 }

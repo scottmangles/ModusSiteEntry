@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Question;
 use App\Http\Requests\QuestionRequest;
 use App\Models\Option;
+use App\Models\Question;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
@@ -18,7 +18,7 @@ class QuestionController extends Controller
     {
         $questions = Question::paginate(15);
 
-       // $deletedQuestions = Question::onlyTrashed()->get();
+        // $deletedQuestions = Question::onlyTrashed()->get();
 
         return view('questions.index')->with([
             'questions' => $questions,
@@ -43,13 +43,13 @@ class QuestionController extends Controller
      */
     public function store(QuestionRequest $request)
     {
-       // dd($request->validated());
-       $question = Question::create($request->validated());
+        // dd($request->validated());
+        $question = Question::create($request->validated());
 
-       return redirect()
+        return redirect()
           ->route('questions.index')
-          ->with(['success' => "Question added to database."
-        ]);
+          ->with(['success' => 'Question added to database.',
+          ]);
     }
 
     /**
@@ -85,16 +85,16 @@ class QuestionController extends Controller
      */
     public function update(QuestionRequest $request, Question $question)
     {
-       //dd($request->validated());
-       $question = $request->question;
+        //dd($request->validated());
+        $question = $request->question;
 
-       $question->fill($request->validated());
-       $question->save();
+        $question->fill($request->validated());
+        $question->save();
 
-       return redirect()
+        return redirect()
         ->route('questions.index')
         ->with([
-            'success' => "Question " . $question->id . " updated in database."
+            'success' => 'Question '.$question->id.' updated in database.',
         ]);
     }
 
@@ -113,25 +113,21 @@ class QuestionController extends Controller
 
         //dd($options);
 
-        if($options->isNotEmpty()) {
-           // dd("options for question id $question->id require deleting before question can be deleted");
-           return redirect()
+        if ($options->isNotEmpty()) {
+            // dd("options for question id $question->id require deleting before question can be deleted");
+            return redirect()
             ->route('questions.index')
             ->with([
-                'warning' => "options for question id " . $question->id . " require deleting before question can be deleted"
+                'warning' => 'options for question id '.$question->id.' require deleting before question can be deleted',
             ]);
-        }
-
-        else {
+        } else {
             $question->delete();
 
             return redirect()
             ->route('questions.index')
             ->with([
-                'success' => "Question " . $oldQuestion . " was deleted"
+                'success' => 'Question '.$oldQuestion.' was deleted',
             ]);
         }
-
-        
     }
 }

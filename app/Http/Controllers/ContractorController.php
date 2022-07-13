@@ -45,7 +45,7 @@ class ContractorController extends Controller
 
         return redirect()
             ->route('contractors.index')
-            ->with(['success' => "contractor " . $contractor->name . " added to database"]);
+            ->with(['success' => 'contractor '.$contractor->name.' added to database']);
     }
 
     /**
@@ -87,7 +87,7 @@ class ContractorController extends Controller
 
         return redirect()
             ->route('contractors.index')
-            ->with(['success' => "contractor " . $contractor->name . " has been updated"]);
+            ->with(['success' => 'contractor '.$contractor->name.' has been updated']);
     }
 
     /**
@@ -100,6 +100,6 @@ class ContractorController extends Controller
     {
         return redirect()
             ->route('contractors.index')
-            ->withWarning("you do not have permission to delete " . $contractor->name . " please contact database administrator");
+            ->withWarning('you do not have permission to delete '.$contractor->name.' please contact database administrator');
     }
 }

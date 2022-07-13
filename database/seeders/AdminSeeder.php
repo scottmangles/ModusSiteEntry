@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -27,8 +27,8 @@ class AdminSeeder extends Seeder
             'sub_contractor' => 1,
             'vehicle_make' => 'Saab',
             'vehicle_reg' => 'LB06 VLD',
-            'cscs_number' => NULL,
-            'remember_token' => Str::random(10)
+            'cscs_number' => null,
+            'remember_token' => Str::random(10),
         ]);
 
         $admin->save();

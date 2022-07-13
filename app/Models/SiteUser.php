@@ -15,17 +15,17 @@ class SiteUser extends Model
         'status',
         'signed_in_by',
         'signed_out_by',
-        'time_on_site', 
-        'time_off_site'
+        'time_on_site',
+        'time_off_site',
     ];
 
-    public function sites(){
+    public function sites()
+    {
         return $this->belongsToMany('App\Models\Site');
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->hasMany('App\Models\User', 'id', 'user_id');
     }
-
-    
 }

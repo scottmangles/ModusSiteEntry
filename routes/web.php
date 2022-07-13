@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiteInductionController;
-use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\OptionController;
-use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ContractorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InductionController;
+use App\Http\Controllers\OptionController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SiteInductionController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ContractorController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +28,6 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::get('/induction', [InductionController::class, 'induction'])->middleware(['auth'])->name('induction');
-
 
 Route::resource('sites', SiteController::class)->middleware('auth');
 Route::resource('site_inductions', SiteInductionController::class)->middleware(['auth']);
@@ -53,16 +52,12 @@ Route::get('/id/{site_pivot_id}/user/{user_id}/site/{site_id}/signoutsitemanager
 
 Route::post('/site/mansignin', [App\Http\Controllers\SiteUserController::class, 'manualSiteEntry'])->middleware('auth')->name('manualSignIn');
 
-
-
 /// Routes to show access status access granted, access warning and access denied
 
 //show site access and site supervised
 Route::get('/showsiteaccess/{site_id}', [App\Http\Controllers\SiteAccessController::class, 'showUsersAccess'])->name('showUsersAccess');
 //show banned users for site
 Route::get('/showbannedusers/{site_id}', [App\Http\Controllers\SiteAccessController::class, 'showUsersBanned'])->name('showUsersBanned');
-
-
 
 ///Routes to change ste access from the respective site manager///
 

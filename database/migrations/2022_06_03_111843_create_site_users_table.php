@@ -23,11 +23,11 @@ class CreateSiteUsersTable extends Migration
             $table->timestamp('time_on_site')->nullable();
             $table->timestamp('time_off_site')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('site_id')
                 ->references('id')->on('sites')
                 ->onDelete('cascade');
-            
+
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
@@ -35,7 +35,7 @@ class CreateSiteUsersTable extends Migration
             $table->foreign('signed_in_by')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-                
+
             $table->foreign('signed_out_by')
                 ->references('id')->on('users')
                 ->onDelete('cascade');

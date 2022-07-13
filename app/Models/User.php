@@ -55,7 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Result::class, 'user_id', 'id');
     }
 
-    public function sites(){
+    public function sites()
+    {
         return $this->belongsToMany('App\Models\Site', 'site_users')
             ->withPivot('status', 'id', 'time_on_site', 'time_off_site')
             ->orderBy('id');
@@ -71,11 +72,13 @@ class User extends Authenticatable
         return $this->hasMany(SiteInduction::class, 'completed_by', 'id');
     }
 
-    public function siteUsers(){
+    public function siteUsers()
+    {
         return $this->belongsToMany('App\Models\SiteUser');
     }
 
-    public function siteManager(){
+    public function siteManager()
+    {
         return $this->belongsTo(Site::class, 'id', 'site_manager');
     }
 
@@ -83,5 +86,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Contractor::class, 'sub_contractor', 'id');
     }
-
 }

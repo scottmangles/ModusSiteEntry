@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSiteInductionRequest;
 use App\Http\Requests\UpdateSiteInductionRequest;
+use App\Models\Site;
 use App\Models\SiteInduction;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Site;
 
 class SiteInductionController extends Controller
 {
@@ -25,7 +25,7 @@ class SiteInductionController extends Controller
         /*
         $usersInducted = SiteInduction::where([['site_id', $site->id], ['status', 'access granted']])
         ->orWhere([['site_id', $site->id], ['status', 'access warning']])
-        ->orderBy('user_id')    
+        ->orderBy('user_id')
         ->paginate(10);
          */
         $users = User::whereNotIn('id', $usersInductedIds)
@@ -45,7 +45,7 @@ class SiteInductionController extends Controller
      */
     public function create()
     {
-       //
+        //
     }
 
     /**

@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SiteRequest;
 use App\Models\Site;
 use App\Models\SiteInduction;
+use App\Models\SiteUser;
 use App\Models\User;
 use Illuminate\Support\Carbon;
-use App\Models\SiteUser;
-use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Request;
 
 class SiteController extends Controller
 {
     public function __construct()
     {
-       
         $this->middleware('site_manager')->only(['show']);
         $this->middleware('admin')->only(['index', 'create', 'edit', 'update', 'destroy']);
     }
@@ -29,7 +28,6 @@ class SiteController extends Controller
     {
         $sites = Site::paginate(10);
 
-        
         return view('sites.index')->with([
             'sites' => $sites,
         ]);
@@ -45,9 +43,9 @@ class SiteController extends Controller
         $users = User::where(
             'role', 'site_manager'
             )->get();
-        
-       // dd($users);
-        
+
+        // dd($users);
+
         return view('sites.create')->with([
             'users' => $users,
         ]);
@@ -66,8 +64,8 @@ class SiteController extends Controller
 
         return redirect()
             ->route('sites.index')
-            ->with(['success' => $site->name . " site added to database."
-        ]); 
+            ->with(['success' => $site->name.' site added to database.',
+            ]);
     }
 
     /**
@@ -77,27 +75,27 @@ class SiteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Site $site)
-    {   
+    {
         $users = User::all();
 
         $onSites = SiteUser::select()
             ->where([['status', '=', 'on site'],
-                ['site_id', '=', $site->id]
+                ['site_id', '=', $site->id],
             ])
             ->paginate(10);
 
         $offSites = SiteUser::select()
             ->WhereDate('time_off_site', Carbon::today())
             ->where([['status', '=', 'off site'],
-                ['site_id', '=', $site->id],])
+                ['site_id', '=', $site->id], ])
             ->paginate(10);
 
         $bannedSites = SiteInduction::select()
             ->where([['status', '=', 'access denied'],
-                ['site_id', '=', $site->id],])
+                ['site_id', '=', $site->id], ])
             ->paginate(10);
-          //dd($bannedSites);
-       // dd($onSites);
+        //dd($bannedSites);
+        // dd($onSites);
 
         return view('sites.show')->with([
             'site' => $site,
@@ -139,8 +137,8 @@ class SiteController extends Controller
 
         return redirect()
             ->route('sites.index')
-            ->with(['success' => $site->name . " site has been updated."
-        ]);
+            ->with(['success' => $site->name.' site has been updated.',
+            ]);
     }
 
     /**
@@ -153,6 +151,6 @@ class SiteController extends Controller
     {
         return redirect()
             ->route('sites.index')
-            ->withWarning("you do not have permission to delete " . $site->name . " please contact database administrator");
+            ->withWarning('you do not have permission to delete '.$site->name.' please contact database administrator');
     }
 }

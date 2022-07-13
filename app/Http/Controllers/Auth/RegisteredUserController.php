@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contractor;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -10,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use App\Models\Contractor;
 
 class RegisteredUserController extends Controller
 {
@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'sub_contractor' => ['required'],
             'vehicle_make' => ['nullable'],
             'vehicle_reg' => ['nullable'],
-            'cscs_number' => ['nullable', 'digits:8']
+            'cscs_number' => ['nullable', 'digits:8'],
         ]);
 
         $user = User::create([
@@ -54,10 +54,10 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'mobile' => $request->mobile,
-            'sub_contractor' => $request->sub_contractor ,
-            'vehicle_make' => $request->vehicle_make ,
-            'vehicle_reg' => $request->vehicle_reg ,
-            'cscs_number' => $request->cscs_number ,
+            'sub_contractor' => $request->sub_contractor,
+            'vehicle_make' => $request->vehicle_make,
+            'vehicle_reg' => $request->vehicle_reg,
+            'cscs_number' => $request->cscs_number,
 
         ]);
 

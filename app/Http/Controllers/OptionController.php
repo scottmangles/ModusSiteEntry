@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OptionRequest;
 use App\Http\Requests\OptionsRequest;
 use App\Http\Requests\UpdateOptionsRequest;
-use Illuminate\Http\Request;
 use App\Models\Option;
 use App\Models\Question;
-use App\Http\Requests\OptionRequest;
+use Illuminate\Http\Request;
 
 class OptionController extends Controller
 {
@@ -47,12 +47,12 @@ class OptionController extends Controller
      */
     public function store(OptionRequest $request)
     {
-       // dd($request->validated());
-       $option = Option::create($request->validated());
+        // dd($request->validated());
+        $option = Option::create($request->validated());
 
-       return $this->index('options.index')->with([
-        'message_success' => "Option added to database."
-    ]);
+        return $this->index('options.index')->with([
+            'message_success' => 'Option added to database.',
+        ]);
     }
 
     /**
@@ -74,7 +74,7 @@ class OptionController extends Controller
      */
     public function edit(Option $option)
     {
-        $questions = Question::all();  
+        $questions = Question::all();
 
         return view('options.edit')->with([
             'option' => $option,
@@ -93,13 +93,13 @@ class OptionController extends Controller
     {
         $option = $request->option;
 
-       $option->fill($request->validated());
-       $option->save();
-        
+        $option->fill($request->validated());
+        $option->save();
+
         return redirect()
         ->route('options.index')
         ->with([
-            'success' => "Option " . $option->id . " updated in database."
+            'success' => 'Option '.$option->id.' updated in database.',
         ]);
     }
 
@@ -118,7 +118,7 @@ class OptionController extends Controller
         return redirect()
         ->route('options.index')
         ->with([
-            'success' => "option " . $oldOption . " was deleted"
+            'success' => 'option '.$oldOption.' was deleted',
         ]);
     }
 }

@@ -20,6 +20,3 @@ trait CreatesApplication
         return $app;
     }
 }
-
-
-

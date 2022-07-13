@@ -14,7 +14,6 @@ class AuthenticatedSessionController extends Controller
     {
         session(['url.intended' => url()->previous()]);
         $this->redirectTo = session()->get('url.intended');
-
     }
 
     /**
@@ -39,11 +38,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-       // dd(session('url.intended'));
+        // dd(session('url.intended'));
 
         if (session('url.intended') != null) {
             $this->redirectTo = session()->get('url.intended');
-
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);

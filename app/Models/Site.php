@@ -20,7 +20,8 @@ class Site extends Model
         'updated_at',
     ];
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany('App\Models\User', 'site_users')
             ->withPivot('status', 'id', 'time_on_site', 'time_off_site')
             ->orderBy('id');
@@ -31,11 +32,13 @@ class Site extends Model
         return $this->hasMany(SiteInduction::class, 'site_id', 'id');
     }
 
-    public function siteUsers(){
+    public function siteUsers()
+    {
         return $this->hasMany('App\Models\SiteUser', 'id', 'site_id');
     }
 
-    public function siteManager(){
+    public function siteManager()
+    {
         return $this->hasOne(User::class, 'id', 'site_manager');
     }
 }
