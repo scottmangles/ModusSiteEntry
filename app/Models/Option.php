@@ -10,12 +10,6 @@ class Option extends Model
     use HasFactory;
 
     public $table = 'options';
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
-
     protected $fillable = [
         'points',
         'created_at',

@@ -10,12 +10,6 @@ class Question extends Model
     use HasFactory;
 
     public $table = 'questions';
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
-
     protected $fillable = [
         'created_at',
         'updated_at',
