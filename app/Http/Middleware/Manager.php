@@ -20,7 +20,7 @@ class Manager
         if (Auth::user()->role == 'manager') {
             return $next($request);
         }
-
+        
         abort(403, 'Manager access only');
     }
 }

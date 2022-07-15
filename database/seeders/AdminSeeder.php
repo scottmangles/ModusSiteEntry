@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
             'name' => 'Scott Mangles',
             'email' => 'admin@smathletic.co.uk',
             'email_verified_at' => now(),
-            'role' => 'admin',
+            //'role' => 'admin',
             'password' => Hash::make('SMAthletic1!'),
             'mobile' => '07538400748',
             'sub_contractor' => 1,

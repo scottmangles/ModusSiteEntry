@@ -12,9 +12,11 @@ class UserPolicy
 
     public function before($user, $ability)
     {
+        /*
         if ($user->role == 'admin') {
             return true;
         }
+        */
     }
 
     /**

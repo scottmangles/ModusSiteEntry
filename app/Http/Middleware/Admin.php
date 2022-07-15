@@ -20,7 +20,7 @@ class Admin
         if (Auth::user()->role == 'admin') {
             return $next($request);
         }
-
+        
         abort(403, 'Admin access only');
     }
 }

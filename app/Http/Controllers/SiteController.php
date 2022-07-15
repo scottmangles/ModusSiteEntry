@@ -15,8 +15,8 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('site_manager')->only(['show']);
-        $this->middleware('admin')->only(['index', 'create', 'edit', 'update', 'destroy']);
+        //$this->middleware('site_manager')->only(['show']);
+       // $this->middleware('admin')->only(['index', 'create', 'edit', 'update', 'destroy']);
     }
 
     /**

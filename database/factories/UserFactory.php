@@ -19,7 +19,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'role' => $this->faker->randomElement(['manager', 'site_manager', 'admin', null]),
+           // 'role' => $this->faker->randomElement(['manager', 'site_manager', 'admin', null]),
             'mobile' => $this->faker->regexify('07[7-9]{1}[0-9]{8}'),
             'sub_contractor' => Contractor::all()->random()->id,
             'vehicle_make' => $this->faker->randomElement(['Ford', 'Mitsubishi', 'Mercedes']),

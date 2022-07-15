@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->only(['index', 'destroy']);
+       // $this->middleware('admin')->only(['index', 'destroy']);
     }
 
     /**
