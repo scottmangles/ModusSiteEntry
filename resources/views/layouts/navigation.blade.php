@@ -53,7 +53,7 @@
             </svg>
             Dashboard
           </a>
-
+{{--  
           @if(Auth::user()->role == 'site_manager')
             <a href="{{ route('sites.show', [Auth::user()->siteManager->id]) }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
               <!-- Heroicon name: office building -->
@@ -144,6 +144,7 @@
             Reports
           </a>
           @endif
+          --}}
           
           <form method="POST" action="{{ route('logout') }}">
             @csrf

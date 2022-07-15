@@ -14,7 +14,8 @@ class SiteFactory extends Factory
      */
     public function definition()
     {
-        $siteManagers = User::select()->where('role', 'site_manager')->get();
+       // $siteManagers = User::select()->where('role', 'site_manager')->get();
+        $siteManagers = User::all();
 
         return [
             'name' => $this->faker->city(),
