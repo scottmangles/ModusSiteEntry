@@ -6,9 +6,12 @@
       <h1 class="text-xl font-semibold text-gray-900">Contractors</h1>
       <p class="mt-2 text-sm text-gray-700">A list of all contractors currently on system</p>
     </div>
+    @can('create_contractor')
     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
       <x-button-link href="{{ route('contractors.create') }}">Add contractor</x-button-link>
     </div>
+    @endcan
+
   </div>
 </div>    
     <div class="mt-8 -mx-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">

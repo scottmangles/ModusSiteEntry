@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContractorRequest;
 use App\Models\Contractor;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use GuzzleHttp\Middleware;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class ContractorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create_contractor')->only(['create']);
+       // $this->middleware('admin')->only(['index', 'create', 'edit', 'update', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
