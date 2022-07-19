@@ -8,6 +8,7 @@ use App\Models\SiteInduction;
 use App\Models\SiteUser;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,8 +16,13 @@ class SiteController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('site_manager')->only(['show']);
-       // $this->middleware('admin')->only(['index', 'create', 'edit', 'update', 'destroy']);
+        $this->middleware('permission:view all sites')->only(['index']);
+        $this->middleware('permission:create site')->only(['create']);
+        $this->middleware('permission:store site')->only(['store']);
+        $this->middleware('permission:show site')->only(['show']);
+        $this->middleware('permission:edit site')->only(['edit']);
+        $this->middleware('permission:update site')->only(['update']);
+        $this->middleware('permission:delete site')->only(['destroy']);
     }
 
     /**
@@ -40,11 +46,9 @@ class SiteController extends Controller
      */
     public function create()
     {
-        $users = User::where(
-            'role', 'site_manager'
-            )->get();
-
-        // dd($users);
+        $users = User::where('sub_contractor', 1)
+            ->get();
+       //  dd($users);
 
         return view('sites.create')->with([
             'users' => $users,
@@ -114,14 +118,14 @@ class SiteController extends Controller
      */
     public function edit(Site $site)
     {
-        $users = User::where(
-            'role', 'site_manager'
-            )->get();
+        $users = User::where('sub_contractor', 1)
+        ->get();
+   //  dd($users);
 
-        return view('sites.edit')->with([
-            'users' => $users,
-            'site' => $site,
-        ]);
+    return view('sites.edit')->with([
+        'users' => $users,
+        'site' => $site,
+    ]);
     }
 
     /**

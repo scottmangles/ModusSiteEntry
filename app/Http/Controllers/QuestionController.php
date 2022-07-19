@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view all questions')->only(['index']);
+        $this->middleware('permission:create question')->only(['create']);
+        $this->middleware('permission:store question')->only(['store']);
+        $this->middleware('permission:show question')->only(['show']);
+        $this->middleware('permission:edit question')->only(['edit']);
+        $this->middleware('permission:update question')->only(['update']);
+        $this->middleware('permission:delete question')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

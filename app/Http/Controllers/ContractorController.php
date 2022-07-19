@@ -14,8 +14,13 @@ class ContractorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:create_contractor')->only(['create']);
-       // $this->middleware('admin')->only(['index', 'create', 'edit', 'update', 'destroy']);
+        $this->middleware('permission:view all contractors')->only(['index']);
+        $this->middleware('permission:create contractor')->only(['create']);
+        $this->middleware('permission:store contractor')->only(['store']);
+        $this->middleware('permission:show contractor')->only(['show']);
+        $this->middleware('permission:edit contractor')->only(['edit']);
+        $this->middleware('permission:update contractor')->only(['update']);
+        $this->middleware('permission:delete contractor')->only(['destroy']);
     }
 
     /**

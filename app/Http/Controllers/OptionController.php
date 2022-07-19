@@ -11,6 +11,18 @@ use Illuminate\Http\Request;
 
 class OptionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:view all options')->only(['index']);
+        $this->middleware('permission:create option')->only(['create']);
+        $this->middleware('permission:store option')->only(['store']);
+        $this->middleware('permission:show option')->only(['show']);
+        $this->middleware('permission:edit option')->only(['edit']);
+        $this->middleware('permission:update option')->only(['update']);
+        $this->middleware('permission:delete option')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

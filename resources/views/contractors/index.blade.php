@@ -6,7 +6,7 @@
       <h1 class="text-xl font-semibold text-gray-900">Contractors</h1>
       <p class="mt-2 text-sm text-gray-700">A list of all contractors currently on system</p>
     </div>
-    @can('create_contractor')
+    @can('create contractor')
     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
       <x-button-link href="{{ route('contractors.create') }}">Add contractor</x-button-link>
     </div>
