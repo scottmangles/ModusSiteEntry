@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/id/{site_pivot_id}/user/{user_id}/site/{site_id}/signoutsitemanager', [App\Http\Controllers\SiteUserController::class, 'signOutSiteManager'])->name('signoutsitemanager');
 
-    Route::post('/site/mansignin', [App\Http\Controllers\SiteUserController::class, 'manualSiteEntry'])->middleware('auth')->name('manualSignIn');
+    Route::post('/site/mansignin', [App\Http\Controllers\SiteUserController::class, 'signInSiteManager'])->name('managerSignIn');
 
     /// Routes to show access status access granted, access warning and access denied
 

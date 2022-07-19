@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+ 
 class SiteUserService
 {
     public function checkSiteSignInStatus($user)
@@ -94,4 +94,5 @@ class SiteUserService
                 'onSite' => $onSite,
             ]);
     }
+
 }

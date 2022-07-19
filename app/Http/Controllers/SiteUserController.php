@@ -20,11 +20,14 @@ class SiteUserController extends Controller
     public function __construct(SiteUserService $siteUserService)
     {
         $this->siteUserService = $siteUserService;
-        $this->middleware('auth');
+        $this->middleware('permission:sign out by site manager')->only(['signOutSiteManager']);
+        $this->middleware('permission:sign in by site manager')->only(['SignInSiteManager']);
     }
 
     public function findUserId($site_id)
-    {
+    {   
+        // find user id of logged in user and then pass to attach 
+        //site user function to sign user onto construction site
         $user_id = Auth::user()->id;
         $site_id = intval($site_id);
 
@@ -35,7 +38,9 @@ class SiteUserController extends Controller
     }
 
     public function attachSiteUser($user, $site)
-    {
+    {   
+        // check conditions all true from siteUserServie
+        // before signing onto construction site
         $sites = Site::all();
 
         $accessStatus = $this->siteUserService->checkSiteAccessStatus($user, $site);
@@ -56,6 +61,8 @@ class SiteUserController extends Controller
 
     public function findUserIdOut($site_id)
     {
+        // find user id of user to sign out of construction site
+        // and check if currently signed into building site
         $user_id = Auth::user()->id;
         $site_id = intval($site_id);
 
@@ -81,6 +88,7 @@ class SiteUserController extends Controller
 
     public function signOutSiteUser($site_pivot_id, $user_id, $site_id)
     {
+        // sign user out of construction site
         $user = User::find($user_id);
         $site = Site::find($site_id);
 
@@ -118,56 +126,32 @@ class SiteUserController extends Controller
            ]);
     }
 
-    public function manualSiteEntry(Request $request)
+    public function signInSiteManager(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $site_id = intval($request->site_id);
+        $sites = Site::all();
+        $user = $request->user;
+        $site = $request->site;
 
-        $siteUsers = SiteUser::select()
-        ->where('user_id', auth()->id())
-        ->where('status', 'on site')
-        ->get();
+        //check site access status
+        $accessStatus = $this->siteUserService->checkSiteAccessStatus($user, $site);
+        //check induction status
+        $siteInductionStatus = $this->siteUserService->checkInductionStatus($user);
+        //check site entry status
+        $entryStatus = $this->siteUserService->checkSiteSignInStatus($user);
 
-        $user = User::find($user_id);
-
-        foreach ($siteUsers as $siteUser) {
-            if ($siteUser->status == 'on site') {
-                $onSite = true;
-
-                return redirect()
-                ->route('dashboard')
-                ->with([
-                    'warning' => 'You cannot sign into multiple sites 
-                    please sign out of current site first',
-                    'user' => $user,
-                    'onSite' => $onSite,
-                ]);
-            }
+        // if all 3 return true send to service sign in by site manager
+        if ($siteInductionStatus === true && $entryStatus === true && $accessStatus === true) {
+            $this->siteUserService->signIntoSite($user, $site);
         }
-
-        $request->validate([
-            'site_id' => 'required',
-        ]);
-
-        $siteUser = new SiteUser([
-            'site_id' => $site_id,
-            'user_id' => $user_id,
-            'status' => 'on site',
-            'time_on_site' => Carbon::now(),
-        ]);
-
-        $siteUser->save();
-
-        $site = Site::find($siteUser->site_id);
-
-        $onSite = true;
+    
 
         return redirect()
-                ->route('dashboard')
-                ->with([
-                    'success' => 'You are signed into '.$site->name.' site',
-                    'user' => $user,
-                    'onSite' => $onSite,
-                ]);
-    }
+            ->route('dashboard')
+            ->with([
+                'user' => $user,
+                'sites' => $sites,
+                'site' => $site
+            ]);
+        }
+
 }

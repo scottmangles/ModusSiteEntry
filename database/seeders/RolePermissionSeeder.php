@@ -303,6 +303,21 @@ class RolePermissionSeeder extends Seeder
             'updated_at' => now(),
         ],
 
+         // SiteUser Controller
+         [   // id 37
+            'name' => 'sign out by site manager',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [   // id 38
+            'name' => 'sign in by site manager',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
     ]);
 
 
@@ -344,6 +359,9 @@ class RolePermissionSeeder extends Seeder
         34,
         35,
         36,
+        //37, // sign out site manager
+        //38, // sign in site manager
+
         
 
 
