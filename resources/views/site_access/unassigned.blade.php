@@ -47,13 +47,16 @@
                 <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->email }}</td>
                 <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->mobile }}</td>
                 <td class="w-full py-4 pl-4 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6"></td>
-                <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
+                @can('allow access to site')
+                  <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
                     <form action="{{ route('allowAccess', [$user->id, $site->id]) }}" method="GET">
                       @csrf
                   
                       <button type="submit" onclick="return confirm('Are you sure you want to place user on green status?')" class="ml-4 text-green-600 hover:text-green-900">Green access</button>
                   </form>
                   </td>
+                  @endcan
+                  @can('allow supervised access to site')
                   <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
                     <form action="{{ route('allowSupervised', [$user->id, $site->id]) }}" method="GET">
                       @csrf
@@ -61,6 +64,7 @@
                       <button type="submit" onclick="return confirm('Are you sure you want to place user on amber status?')" class="ml-4 text-orange-600 hover:text-orange-900">Amber access</button>
                   </form>
                   </td>
+                @endcan
               </tr>
               @endforeach
             </tbody>

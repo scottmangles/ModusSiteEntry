@@ -9,7 +9,7 @@
           </div>
           <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
  
-
+            @if(auth()->user()->can('sign in by site manager') && $site->site_manager == auth()->user()->id)
             <div x-data="{ open: false }">
               <x-button-link-small @click="open = ! open">Sign Personel On Site</x-button-link-small>
            
@@ -27,6 +27,8 @@
               </div>
               </div>
           </div>
+          @endif
+
           </div>
         </div>
     </div>
@@ -82,12 +84,14 @@
             <td class="px-3 py-4 text-sm text-gray-500">{{ Carbon\Carbon::parse($onSite->time_on_site)->format('H:i') }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->mobile }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->email }}</td>
-            <td class="px-3 py-4 text-sm text-gray-500">
-              <form action="{{ route('signoutsitemanager', [$onSite->id, $user->id, $site->id]) }}" method="GET">
-                @csrf
-              <x-button-small type="submit" onclick="return confirm('Are you sure you want to signout?')" class="ml-4">Sign Out</x-button-small>
-            </form>
-        </td>
+            @if(auth()->user()->can('sign in by site manager') && $site->site_manager == auth()->user()->id)
+              <td class="px-3 py-4 text-sm text-gray-500">
+                <form action="{{ route('signoutsitemanager', [$onSite->id, $user->id, $site->id]) }}" method="GET">
+                  @csrf
+                  <x-button-small type="submit" onclick="return confirm('Are you sure you want to signout?')" class="ml-4">Sign Out</x-button-small>
+                </form>
+              </td>
+            @endif
           </tr>
           @endforeach
           @endforeach

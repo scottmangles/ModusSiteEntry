@@ -59,18 +59,19 @@
                 </dl>
               </td>
             <td class="w-full py-4 pl-4 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6"></td>
-
-            <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
-              <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="text-[#173a68] hover:text-blue-800">Edit</a>
-            </td>
-            <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
-              <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-            
-                <button type="submit" onclick="return confirm('You do not have permission to delete a user please contct database admin')" class="ml-4 text-red-600 hover:text-red-900">Delete</button>
-            </form>
-            </td>
+              <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
+                <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="text-[#173a68] hover:text-blue-800">Edit</a>
+              </td>
+            @can('delete user')
+              <td class="py-4 pl-3 pr-4 text-sm font-medium text-right sm:pr-6">
+                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+              
+                  <button type="submit" onclick="return confirm('You do not have permission to delete a user please contct database admin')" class="ml-4 text-red-600 hover:text-red-900">Delete</button>
+              </form>
+              </td>
+            @endcan
           </tr>
           @endforeach
         </tbody>
