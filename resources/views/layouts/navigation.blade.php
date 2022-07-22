@@ -61,7 +61,6 @@
               </svg>
               {{ Auth::user()->siteManager->name }} site
             </a>
-          @endif
           @can('show users with no site access')
           <a href="{{ route('showUsersNoAccess') }}" class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
             <svg class="flex-shrink-0 w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -86,6 +85,8 @@
             Banned users
           </a>
           @endcan
+          @endif
+
 {{-- 
           @if(Auth::user()->role == 'admin')
 
@@ -167,7 +168,7 @@
           <div class="flex items-center">
             <div class="ml-3">
               <p class="text-base font-medium text-white">{{ Auth::user()->name }}</p>
-              <a href="{{ route('users.edit', [Auth::user()->id]) }}"><p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p></a>
+              <a href="{{ route('users.edit', [Auth::user()->id]) }}"><p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Edit profile</p></a>
             </div>
           </div>
         </a>
@@ -313,7 +314,7 @@
             
             <div class="ml-3">
               <p class="text-sm font-medium text-white">{{ Auth::user()->name }}</p>
-              <a href="{{ route('users.edit', [Auth::user()->id]) }}"><p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">View profile</p></a>
+              <a href="{{ route('users.edit', [Auth::user()->id]) }}"><p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Edit profile</p></a>
             </div>
           </div>
       </div>

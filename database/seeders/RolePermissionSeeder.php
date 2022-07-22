@@ -318,7 +318,65 @@ class RolePermissionSeeder extends Seeder
             'updated_at' => now(),
         ],
 
+        // User model
+        [   // id 39
+            'name' => 'view all users',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [   // id 40
+            'name' => 'show user',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [   // id 41
+            'name' => 'delete user',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ], 
+
+         // RolePermission Controller
+         [   // id 42
+            'name' => 'view all user roles and permissions',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [   // id 43
+            'name' => 'update role',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [   // id 44
+            'name' => 'remove role from user',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [   // id 45
+            'name' => 'add permission to user',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [   // id 46
+            'name' => 'remove permission from user',
+            'guard_name' => 'web',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ], 
     ]);
+
 
 
     $admin = Role::find(1);
@@ -361,10 +419,14 @@ class RolePermissionSeeder extends Seeder
         36,
         //37, // sign out site manager
         //38, // sign in site manager
-
-        
-
-
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
 
     ]);
     }

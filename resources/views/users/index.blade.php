@@ -32,7 +32,23 @@
               {{ $user->id }}
             </td>
             <td class="w-full py-4 pl-4 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ $user->name }}</td>
-            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->role }}</td>
+            <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+              @if(auth()->user()->hasRole('admin'))
+                @forelse ($user->roles as $role)
+                    <a href="{{ route('viewroles', ['user_id' => $user->id]) }}" class="text-[#173a68] hover:text-blue-800">
+                      {{ $role->name ?? 'Add Role'}}
+                    </a>
+                    @empty
+                    <a href="{{ route('viewroles', ['user_id' => $user->id]) }}" class="text-[#173a68] hover:text-blue-800">
+                      None
+                    </a>
+                @endforelse
+              @else 
+                @foreach ($user->roles as $role)
+                  {{ $role->name }}
+                @endforeach
+              @endif
+            </td>
             <td class="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-500 max-w-0 sm:w-auto sm:max-w-none sm:pl-6">{{ $user->contractor->name }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->email }}</td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ $user->mobile }}</td>

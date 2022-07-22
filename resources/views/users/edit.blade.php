@@ -36,20 +36,6 @@
                 </div>
             </div>
             <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <x-label>User role </x-label>
-                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                  <select name="role" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-[#173a68] focus:border-[#173a68] sm:max-w-xs sm:text-sm">
-                    @isset($user->role)
-                        <option value="{{ old('user_role') ?? $user->role }}" selected>{{ $user->role }}</option>  
-                    @endisset    
-                        <option value="">None</option>
-                        <option value="admin">Admin</option>
-                        <option value="site_manager">Site Manager</option>
-                        <option value="manager">Manager</option>
-                  </select>
-                </div>
-            </div>
-            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <x-label>Company </x-label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                   <select name="sub_contractor" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-[#173a68] focus:border-[#173a68] sm:max-w-xs sm:text-sm">

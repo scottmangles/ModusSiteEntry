@@ -37,6 +37,22 @@ Route::middleware('auth')->group(function() {
     Route::resource('users', UserController::class)->except(['create', 'show']);
     Route::resource('contractors', ContractorController::class);
 
+    // Routes to change user roles and permissions
+
+    // view user roles and permissions
+    Route::get('/users/rolesandpermissions/{user_id}', [App\Http\Controllers\RolePermissionController::class, 'viewRolesPermissions'])->name('viewroles');
+    // update user role
+    Route::get('/users/updaterole/{user_id}', [App\Http\Controllers\RolePermissionController::class, 'updateRole'])->name('updaterole');
+    // remove user role
+    Route::get('/users/removerole/{user_id}', [App\Http\Controllers\RolePermissionController::class, 'removeRole'])->name('removerole');
+    // add user permission
+    Route::get('/users/addpermission/{user_id}', [App\Http\Controllers\RolePermissionController::class, 'addPermission'])->name('addpermission');
+    // remove user role
+    Route::get('/users/removepermission/{user_id}/{permission_id}', [App\Http\Controllers\RolePermissionController::class, 'removePermission'])->name('removepermission');
+
+    //
+    //
+
     //Find user id and pass perameter to sign in construction site function
     Route::get('/userfind/site/{site_id}', [App\Http\Controllers\SiteUserController::class, 'findUserId'])->name('findUserId');
 

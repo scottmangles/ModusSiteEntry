@@ -7,12 +7,15 @@ use App\Models\Contractor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-       // $this->middleware('admin')->only(['index', 'destroy']);
+        $this->middleware('permission:view all users')->only(['index']);
+        $this->middleware('permission:show user')->only(['show']);
+        $this->middleware('permission:delete user')->only(['destroy']);
     }
 
     /**
@@ -24,8 +27,17 @@ class UserController extends Controller
     {
         $users = User::paginate(10);
 
+        if (auth()->user()->hasRole(Role::all())) {
+            $userRole = true;
+            }
+
+            else {
+                $userRole = false;
+            }
+
         return view('users.index')->with([
             'users' => $users,
+            'userRole' => $userRole,
         ]);
     }
 
@@ -93,6 +105,12 @@ class UserController extends Controller
 
         $user->update($request->validated());
 
+        if (auth()->user()->id === $user->id ) {
+            return redirect()
+            ->route('dashboard')
+            ->with(['success' => "your profile has been updated.",
+            ]);
+        }        
         return redirect()
             ->route('users.index')
             ->with(['success' => $user->name."'s profile has been updated.",
@@ -113,5 +131,7 @@ class UserController extends Controller
             ->route('users.index')
             ->with(['warning' => 'you do not have permission to delete '.$user->name.' please contact database admin',
             ]);
-    }
+    
+    }    
 }
+

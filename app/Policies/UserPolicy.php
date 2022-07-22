@@ -12,11 +12,11 @@ class UserPolicy
 
     public function before($user, $ability)
     {
-        /*
-        if ($user->role == 'admin') {
+        
+        if ($user->hasRole('site_manager') or $user->hasRole('admin') or $user->hasRole('manager')) {
             return true;
         }
-        */
+        
     }
 
     /**
@@ -61,7 +61,7 @@ class UserPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, User $model)
-    {
+    {   
         return $user->id === $model->id;
     }
 

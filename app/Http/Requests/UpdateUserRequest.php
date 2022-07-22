@@ -32,7 +32,6 @@ class UpdateUserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->user->id),
             ],
             'mobile' => ['required', 'digits:11', 'regex:/07[0-9]{9}/'],
-            'role' => ['nullable'],
             'sub_contractor' => ['required'],
             'vehicle_make' => ['nullable'],
             'vehicle_reg' => ['nullable'],
